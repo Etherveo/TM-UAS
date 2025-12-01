@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiga Benang Kehidupan</title>
+    
+    <!-- Import Font Modern (Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome untuk Icon (Optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="styling/style.css">
+    <link rel="Icon" type="img/png" href="pictures/UNG-icon.png">
+</head>
+<body>
+
+    <!-- === HEADER === -->
+    <header>
+        <!-- Dekorasi (Desktop Only) -->
+        <div class="header-decor left"></div>
+        <div class="header-decor right"></div>
+
+        <!-- Judul & Dropdown -->
+        <div class="nav-title-wrapper" onclick="toggleDropdown()">
+            <div class="nav-title">Tiga Benang Kehidupan</div>
+            
+            <!-- Dropdown Menu -->
+            <ul class="dropdown-menu" id="dropdown">
+                <li><a href="#" class="dropdown-item">Karawo</a></li>
+                <li><a href="#characters" class="dropdown-item">Karakter</a></li>
+                <li><a href="#" class="dropdown-item">Kitorang</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- === MAIN CONTENT === -->
+    <main>
+        
+        <!-- SECTION 1: HERO (Gambar Utama & Intro) -->
+        <section class="hero-section">
+            <div class="hero-image-box">
+                <!-- Ganti src dengan file asli: Tekmul-UAS-Result.jpg -->
+                <img src="pictures/Tekmul-UAS-Result.jpg" alt="Tiga Benang Kehidupan" onerror="this.src='https://placehold.co/600x600?text=Gambar+Utama'">
+            </div>
+            <div class="hero-content">
+                <span class="hero-tag">Alkisah Para Benang</span>
+                <h1 class="hero-title">Menyulam Takdir, <br>Satu Benang di Satu Waktu.</h1>
+                <p class="hero-desc">
+                    Bergabunglah dalam perjalanan Si Emas, Si Putih, dan Si Merah. 
+                    Masing-masing membawa warna, karakter, dan tujuan yang berbeda 
+                    dalam selembar kain kehidupan yang sedang mereka rajut bersama.
+                </p>
+                <a href="#characters" class="view-more-btn">Lihat Karakter</a>
+            </div>
+        </section>
+
+        <!-- SECTION 2: CHARACTERS & QUOTES -->
+        <section id="characters">
+            <div class="content-grid">
+                
+                <!-- Kiri: Character Cards -->
+                <div class="char-container">
+                    <div class="section-header">
+                        <h2 class="section-title">Artwork</h2>
+                        <span style="font-size: 0.8rem; color: #888;">Geser untuk melihat ></span>
+                    </div>
+
+                    <div class="cards-wrapper">
+                        <!-- Card 1: Emas -->
+                        <div class="char-card gold" onclick="openDetail('Emas')">
+                            <div class="char-img-box">
+                                <img src="pictures/si_emas.jpg" alt="Si Emas" onerror="this.src='https://placehold.co/300x400/D4AF37/FFF?text=Si+Emas'">
+                            </div>
+                            <div class="char-info">
+                                <h3>Si Emas</h3>
+                                <p>Visionary Planner</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Putih -->
+                        <div class="char-card white" onclick="openDetail('Putih')">
+                            <div class="char-img-box">
+                                <img src="pictures/si_putih.jpg" alt="Si Putih" onerror="this.src='https://placehold.co/300x400/EEE/333?text=Si+Putih'">
+                            </div>
+                            <div class="char-info">
+                                <h3>Si Putih</h3>
+                                <p>Perfectionist Soul</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Merah -->
+                        <div class="char-card red" onclick="openDetail('Merah')">
+                            <div class="char-img-box">
+                                <img src="pictures/si_merah.jpg" alt="Si Merah" onerror="this.src='https://placehold.co/300x400/C0392B/FFF?text=Si+Merah'">
+                            </div>
+                            <div class="char-info">
+                                <h3>Si Merah</h3>
+                                <p>Brave Heart</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tengah: Divider (Hanya visual desktop) -->
+                <div class="divider"></div>
+
+                <!-- Kanan: Quotes -->
+                <div class="quotes-container">
+                    <div class="section-header">
+                        <h2 class="section-title" style="font-size: 1.5rem;">Words</h2>
+                    </div>
+
+                    <div class="quote-card q-gold">
+                        <div class="quote-author">Si Kuning</div>
+                        <p class="quote-text">"Rencana besar dimulai dari satu coretan kecil."</p>
+                    </div>
+
+                    <div class="quote-card q-white">
+                        <div class="quote-author">Si Putih</div>
+                        <p class="quote-text">"Presisi bukan pilihan, itu haya hidup."</p>
+                    </div>
+
+                    <div class="quote-card q-red">
+                        <div class="quote-author">Si Merah</div>
+                        <p class="quote-text">"Setiap benang menyimpan cerita."</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- === FOOTER === -->
+    <footer>
+        <div class="footer-content">
+            <!-- Robby -->
+            <a href="https://github.com/RobbyDarmawann" target="_blank" class="creator-profile" title="RobbyDarmawann">
+                <div class="profile-pic" style="background-color: var(--c-gold);">
+                    <img src="pictures/rPP.png" alt="profile-picture">
+                </div>
+                <span class="creator-name">Robby</span>
+            </a>
+            
+            <!-- Eka -->
+            <a href="https://github.com/EkaAyuu" target="_blank" class="creator-profile" title="EkaAyuu">
+                <div class="profile-pic" style="background-color: #999;">E</div>
+                <span class="creator-name">Eka</span>
+            </a>
+            
+            <!-- Ihsan -->
+            <a href="https://github.com/Etherveo" target="_blank" class="creator-profile"  title="Etherveo">
+                <div class="profile-pic" style="background-color: var(--c-red);">
+                    <img src="pictures/iPP.jpg" alt="profile-picture">
+                </div>
+                <span class="creator-name">Ihsan</span>
+            </a>
+        </div>
+        <p style="margin-top: 2rem; font-size: 0.8rem; color: #aaa;">&copy; 2025 Tiga Benang Kehidupan. All rights reserved.</p>
+    </footer>
+
+    <script src="behavior/script.js"></script>
+</body>
+</html>

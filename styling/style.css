@@ -1,0 +1,455 @@
+/* =========================================
+           1. CORE VARIABLES & RESET
+           ========================================= */
+           :root {
+            /* Palette */
+            --c-gold: #D4AF37;
+            --c-gold-light: #F4D03F;
+            --c-red: #C0392B;
+            --c-red-light: #E74C3C;
+            --c-white: #FFFFFF;
+            --c-dark: #1e1e24;
+            --c-gray: #f4f4f9;
+            --c-text: #2c3e50;
+            
+            /* Dimensions */
+            --header-height: 80px;
+            --border-radius: 20px;
+            
+            /* Transitions */
+            --trans-fast: 0.3s ease;
+            --trans-smooth: 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--c-gray);
+            color: var(--c-text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; object-fit: cover; }
+
+        /* =========================================
+           2. HEADER & NAVIGATION
+           ========================================= */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center; /* Center title */
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 0 2rem;
+            transition: var(--trans-fast);
+        }
+
+        /* Dekorasi Kiri/Kanan (Desktop Only) */
+        .header-decor {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--c-gold), var(--c-red));
+            border-radius: 10px;
+        }
+        .header-decor.left { left: 2rem; }
+        .header-decor.right { right: 2rem; }
+
+        /* Judul Navbar (Trigger Dropdown) */
+        .nav-title-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--c-dark);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding: 10px 20px;
+            transition: var(--trans-fast);
+        }
+
+        .nav-title:hover {
+            color: var(--c-gold);
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 150%; /* Jarak dari judul */
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            background: var(--c-white);
+            min-width: 200px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--trans-smooth);
+            overflow: hidden;
+            z-index: 1001;
+            text-align: center;
+        }
+
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 15px;
+            color: var(--c-dark);
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+            transition: var(--trans-fast);
+        }
+
+        .dropdown-item:last-child { border-bottom: none; }
+        .dropdown-item:hover {
+            background: var(--c-gold-light);
+            color: var(--c-white);
+        }
+
+        /* =========================================
+           3. MAIN LAYOUT & SECTIONS
+           ========================================= */
+        main {
+            padding-top: var(--header-height);
+            max-width: 1440px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        section {
+            padding: 4rem 2rem;
+            min-height: 80vh; /* Agar efek scroll terasa */
+            position: relative;
+            opacity: 0; /* Init state for animation */
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            justify-content: space-between;
+        }
+
+        .hero-image-box {
+            flex: 1;
+            background: var(--c-white);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-image-box:hover img {
+            transform: scale(1.02);
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 2rem;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: var(--c-gold-light);
+            color: var(--c-white);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--c-dark), var(--c-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        /* --- CHARACTER & QUOTES SECTION --- */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1px 1fr; /* Kiri (Kartu) | Garis | Kanan (Quotes) */
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .divider {
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--c-gold), transparent);
+            opacity: 0.5;
+        }
+
+        /* Character Cards Area */
+        .char-container {
+            width: 100%;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title { font-size: 1.8rem; font-weight: 700; color: var(--c-dark); }
+        .view-more-btn {
+            background: var(--c-dark);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: var(--trans-fast);
+        }
+        .view-more-btn:hover { background: var(--c-red); transform: translateY(-2px); }
+
+        /* Wrapper Kartu */
+        .cards-wrapper {
+            display: flex;
+            gap: 20px;
+            /* Default Desktop: Normal flex row */
+        }
+
+        .char-card {
+            flex: 1;
+            background: var(--c-white);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: var(--trans-fast);
+            position: relative;
+            overflow: hidden;
+            min-width: 200px; /* Jaga lebar di desktop */
+        }
+
+        .char-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .char-img-box {
+            height: 250px;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            background-color: #eee;
+        }
+        
+        .char-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Pastikan gambar full */
+        }
+
+        .char-info h3 { font-size: 1.2rem; margin-bottom: 5px; }
+        .char-info p { font-size: 0.85rem; color: #888; }
+
+        /* Warna Aksen Kartu */
+        .char-card.gold::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:5px; background: var(--c-gold); }
+        .char-card.white::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:5px; background: #ccc; }
+        .char-card.red::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:5px; background: var(--c-red); }
+
+        /* Quote Cards Area */
+        .quotes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .quote-card {
+            background: var(--c-white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            border-left: 4px solid transparent;
+        }
+
+        .quote-card.q-gold { border-color: var(--c-gold); }
+        .quote-card.q-white { border-color: #999; }
+        .quote-card.q-red { border-color: var(--c-red); }
+
+        .quote-author {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .q-gold .quote-author { color: var(--c-gold); }
+        .q-white .quote-author { color: #777; }
+        .q-red .quote-author { color: var(--c-red); }
+
+        .quote-text {
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* =========================================
+           4. FOOTER
+           ========================================= */
+        footer {
+            background: var(--c-white);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .creator-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-pic {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ddd; /* Placeholder color */
+            overflow: hidden;
+            border: 2px solid var(--c-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #fff;
+            background-size: cover;
+        }
+
+        .creator-name {
+            font-weight: 600;
+            color: var(--c-dark);
+            position: relative;
+        }
+        
+        .creator-name::before {
+            content: '\f09b'; /* GitHub Icon */
+            font-family: 'Font Awesome 6 Brands'; /* Ganti jadi Brands */
+            font-weight: 400; /* Harus normal kalau brands */
+            font-size: 0.9rem;
+            margin-right: 10%;
+        }
+
+        .creator-name:hover { color: var(--c-red); }
+
+        /* =========================================
+           5. RESPONSIVE (MOBILE)
+           ========================================= */
+        @media (max-width: 768px) {
+            /* Header */
+            .header-decor { display: none; }
+            .nav-title { font-size: 1.2rem; }
+            
+            /* Hero Section */
+            .hero-section {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .hero-image-box { width: 100%; padding: 10px; }
+            .hero-content { padding-right: 0; text-align: center; }
+            .hero-title { font-size: 2rem; }
+
+            /* Grid Layout Reset */
+            .content-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+            }
+            
+            .divider {
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(to right, transparent, var(--c-gold), transparent);
+            }
+
+            /* Character Cards - Mobile Scroll/Swipe */
+            .cards-wrapper {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 15px;
+                padding-bottom: 20px; /* Ruang scrollbar */
+                -webkit-overflow-scrolling: touch; /* Smooth scroll iOS */
+            }
+            
+            /* Sembunyikan Scrollbar tapi tetap bisa scroll */
+            .cards-wrapper::-webkit-scrollbar { height: 4px; }
+            .cards-wrapper::-webkit-scrollbar-thumb { background: var(--c-gold); border-radius: 10px; }
+            .cards-wrapper::-webkit-scrollbar-track { background: #eee; }
+
+            .char-card {
+                min-width: 85vw; /* Lebar hampir 1 layar */
+                scroll-snap-align: center;
+                margin-right: 0;
+                transform: scale(0.95); /* Efek agak kecil kalau blm fokus */
+                transition: transform 0.3s;
+            }
+
+            /* Quotes Mobile */
+            .quotes-container {
+                width: 100%;
+            }
+        }
