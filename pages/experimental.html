@@ -65,12 +65,14 @@
             width: 100%;
             height: var(--header-height);
             background: linear-gradient(135deg,
-            #b09605,
-            #c4c2b6,
-            #ba1515
+            #F4D03F,
+            #f4f4f9,
+            #C0392B
             );
-            background-size: 400% 400%;
-            animation: gradientMove 12s ease-in-out infinite;
+            background-size: 300% 300%;
+            animation: holo 15s ease infinite;
+
+
             backdrop-filter: blur(10px);
             z-index: 1000;
             display: flex;
@@ -81,9 +83,11 @@
             transition: var(--trans-fast);
         }
 
-        @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 100%; }
+        @keyframes holo {
+        0%   { background-position: 0% 50%; }
+        25%  { background-position: 50% 100%; }
+        50%  { background-position: 100% 50%; }
+        75%  { background-position: 50% 0%; }
         100% { background-position: 0% 50%; }
         }
 

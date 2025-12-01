@@ -11,6 +11,7 @@
             --c-dark: #1e1e24;
             --c-gray: #f4f4f9;
             --c-text: #2c3e50;
+            --c-backround: #f6eedd;
             
             /* Dimensions */
             --header-height: 80px;
@@ -29,7 +30,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--c-gray);
+            background-color: var(--c-backround);
             color: var(--c-text);
             overflow-x: hidden;
             line-height: 1.6;
@@ -48,15 +49,29 @@
             left: 0;
             width: 100%;
             height: var(--header-height);
-            background: rgba(255, 255, 255, 0.9);
+            background: linear-gradient(135deg,
+            var(--c-gold),
+            var(--c-gray),
+            var(--c-red)
+            );
+            background-size: 300% 300%;
+            animation: holo 15s ease infinite;
             backdrop-filter: blur(10px);
             z-index: 1000;
             display: flex;
             justify-content: center; /* Center title */
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 20px 20px rgba(0,0,0,0.09);
             padding: 0 2rem;
             transition: var(--trans-fast);
+        }
+
+        @keyframes holo {
+            0%   { background-position: 0% 50%; }
+            25%  { background-position: 50% 100%; }
+            50%  { background-position: 100% 50%; }
+            75%  { background-position: 50% 0%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Dekorasi Kiri/Kanan (Desktop Only) */
@@ -116,6 +131,23 @@
             visibility: visible;
             transform: translateX(-50%) translateY(0);
         }
+
+        /* ANIMASI BARU: Staggered Items */
+        .dropdown-menu li {
+            opacity: 0;
+            transform: translateY(-20px); /* Mulai dari agak atas */
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .dropdown-menu.active li {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delay berjenjang untuk tiap item */
+        .dropdown-menu.active li:nth-child(1) { transition-delay: 0.1s; }
+        .dropdown-menu.active li:nth-child(2) { transition-delay: 0.2s; }
+        .dropdown-menu.active li:nth-child(3) { transition-delay: 0.3s; }
 
         .dropdown-item {
             display: block;
@@ -277,6 +309,18 @@
         .char-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .char-card.gold:hover {
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.35);
+        }
+
+        .char-card.white:hover {
+            box-shadow: 0 15px 35px rgba(244, 244, 249, 0.35);
+        }
+
+        .char-card.red:hover {
+            box-shadow: 0 15px 35px rgba(192, 57, 43, 0.35);
         }
 
         .char-img-box {
