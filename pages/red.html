@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Genshin UI Transition Demo</title>
+    <style>
+        body {
+    margin: 0;
+    font-family: sans-serif;
+
+    /* Background default (Keqing) */
+    --bg1: #3f2b8a;
+    --bg2: #6a4cd9;
+
+    background: linear-gradient(120deg, var(--bg1), var(--bg2));
+    background-size: 200% 200%;
+    transition: background 1s ease, transform 1s ease;
+}
+
+/* Tema Hu Tao */
+body.theme-hutao {
+    --bg1: #3a0a0a;
+    --bg2: #8a1c1c;
+}
+
+header {
+    padding: 20px;
+}
+
+#switchTheme {
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+.content-container {
+    padding: 40px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* BLOCK NORMAL LOOK */
+.content-block {
+    background: rgba(255,255,255,0.15);
+    padding: 30px;
+    font-size: 24px;
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+
+    transition: transform .6s ease, opacity .6s ease;
+}
+
+/* ============================= */
+/* 1) ANIMASI KONTEN TERURAI */
+/* ============================= */
+
+body.transition-start .block1 {
+    opacity: 0;
+    transform: translate(-120px, -120px);
+}
+
+body.transition-start .block2 {
+    opacity: 0;
+    transform: translate(120px, -120px);
+}
+
+body.transition-start .block3 {
+    opacity: 0;
+    transform: translate(-120px, 120px);
+}
+
+body.transition-start .block4 {
+    opacity: 0;
+    transform: translate(120px, 120px);
+}
+
+/* ============================= */
+/* 2) BACKGROUND FADE + ZOOM */
+/* ============================= */
+body.transition-start {
+    transform: scale(1.08);
+    opacity: .5;
+}
+
+/* ============================= */
+/* 3) KONTEN BARU MUNCUL DARI BAWAH */
+/* ============================= */
+body.transition-end .content-block {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+body.transition-final .content-block {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: .1s;
+}
+    </style>
+</head>
+<body class="theme-keqing">
+
+<header>
+    <button id="switchTheme">Ganti Tema</button>
+</header>
+
+<div id="content" class="content-container">
+    <div class="content-block block1">Konten 1</div>
+    <div class="content-block block2">Konten 2</div>
+    <div class="content-block block3">Konten 3</div>
+    <div class="content-block block4">Konten 4</div>
+</div>
+
+<script>
+    const btn = document.getElementById("switchTheme");
+let hutao = false;
+
+btn.addEventListener("click", () => {
+
+    // 1) MULAI ANIMASI TERURAI
+    document.body.classList.add("transition-start");
+
+    // 2) Setelah 600ms → ganti tema
+    setTimeout(() => {
+        hutao = !hutao;
+        document.body.classList.toggle("theme-hutao", hutao);
+    }, 600);
+
+    // 3) Setelah background berganti → konten reset
+    setTimeout(() => {
+        document.body.classList.remove("transition-start");
+        document.body.classList.add("transition-end");
+    }, 1000);
+
+    // 4) Konten muncul dari bawah
+    setTimeout(() => {
+        document.body.classList.remove("transition-end");
+        document.body.classList.add("transition-final");
+    }, 1100);
+});
+</script>
+</body>
+</html>

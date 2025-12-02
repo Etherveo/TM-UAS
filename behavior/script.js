@@ -26,7 +26,7 @@
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                     // Kita tidak unobserve biar kalau discroll ke atas terus ke bawah lagi, animasinya main lagi (opsional)
-                    // observer.unobserve(entry.target); 
+                    observer.unobserve(entry.target); 
                 }
             });
         }, observerOptions);
