@@ -6,7 +6,7 @@ const charData = {
         desc: "Perencana ulung yang melihat masa depan dalam selembar kertas kosong. Senjatanya adalah imajinasi dan ketepatan sketsa.",
         color: "#D4AF37",
         bg: "#F9F3E0",
-        img: "si_emas.jpg",
+        img: "../pictures/emas.png",
         stats: { lvl: 50, exp: 15000, hp: 4000, mp: 1200, acc: "98%", agi: 60, crit: "30%", ras: "Mummy", age: "3000+" },
         weapons: [
             { name: "Eternal Pencil", stat: "ATK +50", skill: "Reality Drawing: Apa yang digambar menjadi nyata selama 10 detik.", icon: "fa-pencil-alt" },
@@ -20,7 +20,7 @@ const charData = {
         desc: "Presisi adalah segalanya. Tidak ada jahitan yang meleset, tidak ada potongan yang miring. Hidup adalah tentang kesempurnaan.",
         color: "#A0A0A0", // Agak abu biar keliatan
         bg: "#dde1e7", // Putih keabuan
-        img: "si_putih.jpg",
+        img: "../pictures/putih.png",
         stats: { lvl: 55, exp: 18000, hp: 3200, mp: 900, acc: "100%", agi: 85, crit: "70%", ras: "Mummy", age: "2800+" },
         weapons: [
             { name: "Silver Needle", stat: "Pierce +80", skill: "Thread of Fate: Menjahit bayangan musuh, menghentikan pergerakan mereka.", icon: "fa-hashtag" }, // Ganti icon jarum
@@ -34,7 +34,7 @@ const charData = {
         desc: "Keberanian yang membara dalam setiap serat benang merah. Ia tidak takut putus, ia hanya takut tidak pernah mengikat apa pun.",
         color: "#C0392B",
         bg: "#EADBD9",
-        img: "si_merah.jpg",
+        img: "../pictures/merah.png",
         stats: { lvl: 60, exp: 22000, hp: 5500, mp: 600, acc: "80%", agi: 90, crit: "50%", ras: "Mummy", age: "2500+" },
         weapons: [
             { name: "Blood Needle", stat: "Lifesteal +20%", skill: "Stitch Healing: Menjahit luka sendiri secara instan.", icon: "fa-syringe" },
