@@ -1,142 +1,146 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Genshin UI Transition Demo</title>
-    <style>
-        body {
-    margin: 0;
-    font-family: sans-serif;
-
-    /* Background default (Keqing) */
-    --bg1: #3f2b8a;
-    --bg2: #6a4cd9;
-
-    background: linear-gradient(120deg, var(--bg1), var(--bg2));
-    background-size: 200% 200%;
-    transition: background 1s ease, transform 1s ease;
-}
-
-/* Tema Hu Tao */
-body.theme-hutao {
-    --bg1: #3a0a0a;
-    --bg2: #8a1c1c;
-}
-
-header {
-    padding: 20px;
-}
-
-#switchTheme {
-    padding: 10px 20px;
-    border-radius: 8px;
-}
-
-.content-container {
-    padding: 40px;
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(2, 1fr);
-}
-
-/* BLOCK NORMAL LOOK */
-.content-block {
-    background: rgba(255,255,255,0.15);
-    padding: 30px;
-    font-size: 24px;
-    backdrop-filter: blur(6px);
-    border-radius: 12px;
-
-    transition: transform .6s ease, opacity .6s ease;
-}
-
-/* ============================= */
-/* 1) ANIMASI KONTEN TERURAI */
-/* ============================= */
-
-body.transition-start .block1 {
-    opacity: 0;
-    transform: translate(-120px, -120px);
-}
-
-body.transition-start .block2 {
-    opacity: 0;
-    transform: translate(120px, -120px);
-}
-
-body.transition-start .block3 {
-    opacity: 0;
-    transform: translate(-120px, 120px);
-}
-
-body.transition-start .block4 {
-    opacity: 0;
-    transform: translate(120px, 120px);
-}
-
-/* ============================= */
-/* 2) BACKGROUND FADE + ZOOM */
-/* ============================= */
-body.transition-start {
-    transform: scale(1.08);
-    opacity: .5;
-}
-
-/* ============================= */
-/* 3) KONTEN BARU MUNCUL DARI BAWAH */
-/* ============================= */
-body.transition-end .content-block {
-    opacity: 0;
-    transform: translateY(40px);
-}
-
-body.transition-final .content-block {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: .1s;
-}
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info Karakter</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="../styling/red-style.css">
+    <link rel="icon" type="image/png" href="../pictures/UNG-icon.png">
 </head>
-<body class="theme-keqing">
+<body data-theme="gold">
 
-<header>
-    <button id="switchTheme">Ganti Tema</button>
-</header>
+    <!-- === HEADER === -->
+    <header>
+        <div class="nav-left">
+            <a href="../index.html" class="nav-btn"><i class="fas fa-arrow-left me-2"></i> Back</a>
+            <a href="../pages/karawo.html" class="nav-btn">Karawo</a>
+            <a href="../pages/kitorang.html" class="nav-btn">Kitorang</a>
+        </div>
 
-<div id="content" class="content-container">
-    <div class="content-block block1">Konten 1</div>
-    <div class="content-block block2">Konten 2</div>
-    <div class="content-block block3">Konten 3</div>
-    <div class="content-block block4">Konten 4</div>
-</div>
+        <div class="theme-switcher-desktop">
+            <div class="palette-btn p-gold" onclick="switchTheme('gold')" title="Si Emas"></div>
+            <div class="palette-btn p-white" onclick="switchTheme('white')" title="Si Putih"></div>
+            <div class="palette-btn p-red" onclick="switchTheme('red')" title="Si Merah"></div>
+        </div>
 
-<script>
-    const btn = document.getElementById("switchTheme");
-let hutao = false;
+        <div class="theme-switcher-mobile">
+            <div class="current-palette p-gold" id="mobPaletteBtn" onclick="toggleMobMenu()"></div>
+            <div class="mobile-dropdown" id="mobDropdown">
+                <div class="palette-btn p-gold" onclick="switchTheme('gold')"></div>
+                <div class="palette-btn p-white" onclick="switchTheme('white')"></div>
+                <div class="palette-btn p-red" onclick="switchTheme('red')"></div>
+            </div>
+        </div>
+    </header>
 
-btn.addEventListener("click", () => {
+    <main>
+        <!-- ================= DESKTOP LAYOUT (Grid Areas) ================= -->
+        <div class="desktop-layout anim-target" id="desktopContainer">
+            
+            <!-- 1. INFO PANEL (Left) -->
+            <section class="area-info">
+                <div class="info-panel-content">
+                    <div class="char-header-text">
+                        <span class="char-class-text" id="deskClass">Class Name</span>
+                    </div>
+                    <div class="desc-box-text" id="deskDesc">Description...</div>
+                    <div class="stats-grid" id="deskStats">
+                        <!-- Stats Injected Here -->
+                    </div>
+                </div>
+            </section>
 
-    // 1) MULAI ANIMASI TERURAI
-    document.body.classList.add("transition-start");
+            <!-- 2. NAME (Center Top / Right Bottom) -->
+            <section class="area-name">
+                <h1 class="char-name-big" id="deskName">SI EMAS</h1>
+            </section>
 
-    // 2) Setelah 600ms → ganti tema
-    setTimeout(() => {
-        hutao = !hutao;
-        document.body.classList.toggle("theme-hutao", hutao);
-    }, 600);
+            <!-- 3. IMAGE (Center Bottom / Right Top) -->
+            <section class="area-image">
+                <img src="" alt="Character" class="char-img-style" id="deskImg">
+            </section>
 
-    // 3) Setelah background berganti → konten reset
-    setTimeout(() => {
-        document.body.classList.remove("transition-start");
-        document.body.classList.add("transition-end");
-    }, 1000);
+            <!-- 4. EQUIPMENT (Right / Left Top) -->
+            <section class="area-equip" id="deskEquip">
+                <!-- Elements Injected Here -->
+            </section>
 
-    // 4) Konten muncul dari bawah
-    setTimeout(() => {
-        document.body.classList.remove("transition-end");
-        document.body.classList.add("transition-final");
-    }, 1100);
-});
-</script>
+        </div>
+
+        <!-- ================= MOBILE LAYOUT (Flipper Universal) ================= -->
+        <div class="mobile-layout-wrapper anim-target" id="mobileContainer">
+            
+            <!-- Mobile Header (Outside Card) -->
+            <div class="mob-header-section">
+                <h1 class="mob-char-name" id="mobName">SI EMAS</h1>
+                <span class="mob-char-class" id="mobClass">The Visionary</span>
+            </div>
+
+            <!-- Flipper Card -->
+            <div class="flip-container" id="mobFlipper" onclick="this.classList.toggle('flipped')">
+                <div class="flipper">
+                    
+                    <!-- Front: Image & Equip -->
+                    <div class="flip-face front">
+                        <!-- Image Container -->
+                        <div class="mob-front-img">
+                            <img src="" id="mobImg">
+                        </div>
+                        <!-- Equipment Container (Vertical Stack) -->
+                        <div class="mob-front-equip" id="mobEquip">
+                            <!-- Icons Injected Here -->
+                        </div>
+                        
+                        <div class="flip-hint"><i class="fas fa-sync"></i> Tap to flip</div>
+                    </div>
+                    
+                    <!-- Back: Stats -->
+                    <div class="flip-face back">
+                        <div class="desc-box-text" id="mobDesc" style="margin-bottom: 1rem;"></div>
+                        <div class="stats-grid" id="mobStats"></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Spacer for future content -->
+            <div class="mobile-spacer">
+                <!-- Area kosong buat lo nambahin sesuatu nanti -->
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- TEMPLATES -->
+    <template id="tmpl-elements">
+        <div class="col-item" onclick="openBioPopup(event)">
+            <img src="" class="col-img-face">
+        </div>
+        <div class="col-item" onclick="openWeaponPopup(0, event)">
+            <img src="" class="icon-w1">
+        </div>
+        <div class="col-item" onclick="openWeaponPopup(1, event)">
+            <img src="" class="icon-w2">
+        </div>
+    </template>
+
+    <!-- POPUPS -->
+    <div class="popup-overlay" id="popupOverlay" onclick="closePopup(event)">
+        <div class="popup-card">
+            <span class="popup-close" onclick="closePopupButton()">&times;</span>
+            <div id="popupContent"></div>
+        </div>
+    </div>
+
+    <script src="../behavior/red-script.js"></script>
 </body>
 </html>
