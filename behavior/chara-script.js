@@ -1,24 +1,26 @@
 // === DATA KARAKTER ===
 const charData = {
     gold: {
-        theme: 'gold', color: '#D4AF37', bg: '#F9F3E0', img: '../pictures/emas.png',
+        theme: 'gold', color: '#D4AF37', bg: '#F9F3E0', img: '../pictures/si_hulawa.png',
         name: "SI EMAS", class: "The Visionary Planner",
         desc: "Perencana ulung yang melihat masa depan dalam selembar kertas kosong. Imajinasinya adalah cetak biru realitas.",
-        stats: { lvl: 50, exp: 15000, hp: 4000, mp: 1200, acc: "98%", agi: 60, crit: "30%", ras: "Mummy", age: "3000+" },
+        stats: { lvl: 50, exp: 15000, hp: 4000, mp: 1200, acc: "98%", agi: 60, crit: "30%", ras: "Benang", age: "3000+" },
         weapons: [
             { name: "Eternal Pencil", stat: "ATK +50", skill: "Reality Drawing: Apa yang digambar menjadi nyata selama 10 detik.", icon: '../pictures/pensil.png' },
-            { name: "Blueprint Paper", stat: "DEF +30", skill: "Strategic Shield: Mengurangi damage sebesar 50% saat merencanakan serangan.", icon: '../pictures/kertas.png' }
+            { name: "Blueprint Paper", stat: "MP +500", skill: "Strategic Magic Scroll: Menambah MP sebesar 41,67% saat mulai menggambar.", icon: '../pictures/kertas.png' },
+            { name: "Holy Mantle", stat: "DEF +30", skill: "Flexible Shield: Mengurangi damage sebesar 50% saat merencanakan serangan.", icon: '../pictures/gold-mantel.png' }
         ],
-        bio: "Si Emas lahir dari benang emas kerajaan kuno. Ia percaya bahwa takdir tidak ditulis oleh dewa, tapi digambar oleh diri sendiri."
+        bio: "Si Hulawa lahir dari benang emas kerajaan kuno. Ia percaya bahwa takdir tidak ditulis oleh dewa, tapi digambar oleh diri sendiri."
     },
     white: {
         theme: 'white', color: '#333', bg: '#dde1e7', img: '../pictures/putih.png',
         name: "SI PUTIH", class: "Perfectionist Soul",
         desc: "Presisi adalah segalanya. Tidak ada jahitan yang meleset. Hidup adalah tentang kesempurnaan absolut.",
-        stats: { lvl: 55, exp: 18000, hp: 3200, mp: 900, acc: "100%", agi: 85, crit: "70%", ras: "Mummy", age: "2800+" },
+        stats: { lvl: 55, exp: 18000, hp: 3200, mp: 900, acc: "100%", agi: 85, crit: "70%", ras: "Benang", age: "2800+" },
         weapons: [
             { name: "Silver Needle", stat: "Pierce +80", skill: "Thread of Fate: Menjahit bayangan musuh, menghentikan pergerakan mereka.", icon: '../pictures/jarum.png' },
-            { name: "Razor Blade", stat: "Crit +40%", skill: "Clean Cut: Memotong pertahanan musuh, mengabaikan 100% armor.", icon: '../pictures/silet.png' }
+            { name: "Razor Blade", stat: "Crit +40%", skill: "Clean Cut: Memotong pertahanan musuh, mengabaikan 100% armor.", icon: '../pictures/silet.png' },
+            { name: "Holy Mantle", stat: "DEF +30", skill: "Flexible Shield: Mengurangi damage sebesar 50% saat merencanakan serangan.", icon: '../pictures/gold-mantel.png' }
         ],
         bio: "Si Putih dulunya adalah kepala penjahit istana yang diasingkan karena terlalu obsesif. Ia mencari kain legendaris yang konon bisa membungkus waktu."
     },
@@ -26,51 +28,95 @@ const charData = {
         theme: 'red', color: '#C0392B', bg: '#EADBD9', img: '../pictures/merah.png',
         name: "SI MERAH", class: "Brave Heart",
         desc: "Keberanian membara dalam serat benang merah. Bertarung bukan untuk menang, tapi untuk melindungi ikatan.",
-        stats: { lvl: 60, exp: 22000, hp: 5500, mp: 600, acc: "80%", agi: 90, crit: "50%", ras: "Mummy", age: "2500+" },
+        stats: { lvl: 60, exp: 22000, hp: 5500, mp: 600, acc: "80%", agi: 90, crit: "50%", ras: "Benang", age: "2500+" },
         weapons: [
             { name: "Blood Needle", stat: "Lifesteal +20%", skill: "Stitch Healing: Menjahit luka sendiri secara instan.", icon: '../pictures/magic_jarum.png' },
-            { name: "Red Thread", stat: "Range +100", skill: "Puppet Master: Mengendalikan pergerakan lawan dengan benang merah.", icon: '../pictures/the_string.png' }
+            { name: "Red Thread", stat: "Range +100", skill: "Puppet Master: Mengendalikan pergerakan lawan dengan benang merah.", icon: '../pictures/the_string.png' },
+            { name: "Holy Mantle", stat: "DEF +30", skill: "Flexible Shield: Mengurangi damage sebesar 50% saat merencanakan serangan.", icon: '../pictures/gold-mantel.png' }
         ],
         bio: "Si Merah adalah prajurit garis depan. Benang merahnya konon berasal dari darah naga. Ia bertarung bukan untuk menang, tapi untuk melindungi ikatan persahabatan."
     }
 };
 
-let activeTheme = 'gold';
+// Global Vars
+let activeTheme = 'gold'; // Default fallback
 const body = document.body;
-const desktopContainer = document.getElementById('desktopContainer');
+const desktopWrapper = document.getElementById('desktopWrapper');
 const mobileContainer = document.getElementById('mobileContainer');
 
-window.onload = () => { loadContent('gold'); };
+// === INITIALIZATION (UPDATED) ===
+window.onload = () => {
+    // 1. Cek URL Parameter (?theme=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetTheme = urlParams.get('theme');
 
+    // 2. Validasi theme (harus ada di charData), kalau tidak valid/kosong, pakai 'gold'
+    if (targetTheme && charData[targetTheme]) {
+        activeTheme = targetTheme;
+    } else {
+        activeTheme = 'gold';
+    }
+
+    // 3. Set Tampilan Awal Tanpa Animasi (Instant)
+    applyThemeStyles(activeTheme);
+    loadContent(activeTheme);
+    history.replaceState({}, document.title, window.location.pathname);
+};
+
+// Fungsi Helper untuk set style & layout visibility
+function applyThemeStyles(theme) {
+    // Set CSS Variables
+    body.setAttribute('data-theme', theme);
+    document.documentElement.style.setProperty('--theme-primary', charData[theme].color);
+    document.documentElement.style.setProperty('--theme-bg', charData[theme].bg);
+    
+    // Update Mobile Button Color
+    const btn = document.getElementById('mobPaletteBtn');
+    if(btn) btn.className = `current-palette p-${theme}`;
+
+    // Handle Desktop Layout Toggle (Standard vs Red)
+    const stdLayout = document.getElementById('desktop-standard');
+    const redLayout = document.getElementById('desktop-red');
+
+    if (theme === 'red') {
+        stdLayout.style.display = 'none';
+        redLayout.style.display = 'flex';
+    } else {
+        redLayout.style.display = 'none';
+        stdLayout.style.display = 'flex';
+    }
+}
+
+// === THEME SWITCHING LOGIC (Button Click) ===
 function switchTheme(newTheme) {
     if (activeTheme === newTheme) { toggleMobMenu(false); return; }
 
     // 1. Exit Anim
-    desktopContainer.classList.add('anim-exit');
-    mobileContainer.classList.add('anim-exit');
+    if(desktopWrapper) desktopWrapper.classList.add('anim-exit');
+    if(mobileContainer) mobileContainer.classList.add('anim-exit');
 
-    // 2. Change Data
+    // 2. Change Data & Layout Visibility (After delay)
     setTimeout(() => {
-        body.setAttribute('data-theme', newTheme);
-        document.documentElement.style.setProperty('--theme-primary', charData[newTheme].color);
-        document.documentElement.style.setProperty('--theme-bg', charData[newTheme].bg);
-        
-        document.getElementById('mobPaletteBtn').className = `current-palette p-${newTheme}`;
+        applyThemeStyles(newTheme); // Panggil helper yang sama
         toggleMobMenu(false);
 
         loadContent(newTheme);
-        document.getElementById('mobFlipper').classList.remove('flipped');
+        
+        // Reset Flipper State
+        const flipper = document.getElementById('mobFlipper');
+        if(flipper) flipper.classList.remove('flipped');
 
         // 3. Enter Anim
         setTimeout(() => {
-            desktopContainer.classList.remove('anim-exit');
-            mobileContainer.classList.remove('anim-exit');
+            if(desktopWrapper) desktopWrapper.classList.remove('anim-exit');
+            if(mobileContainer) mobileContainer.classList.remove('anim-exit');
         }, 100); 
 
         activeTheme = newTheme;
     }, 500); 
 }
 
+// === CONTENT LOADING FUNCTION ===
 function loadContent(theme) {
     const data = charData[theme];
 
@@ -90,21 +136,23 @@ function loadContent(theme) {
     // 2. ELEMENTS HTML GEN
     const tmpl = document.getElementById('tmpl-elements');
     const elFrag = tmpl.content.cloneNode(true);
-    elFrag.querySelector('.col-img-face').src = data.img;
+    elFrag.querySelector('.col-img-face').src = data.weapons[2].icon;
     elFrag.querySelector('.icon-w1').src = data.weapons[0].icon;
     elFrag.querySelector('.icon-w2').src = data.weapons[1].icon;
 
-    // --- DESKTOP INJECTION ---
-    document.getElementById('deskClass').innerText = data.class;
-    document.getElementById('deskDesc').innerText = data.desc;
-    document.getElementById('deskStats').innerHTML = statsHtml;
-    
-    document.getElementById('deskName').innerText = data.name;
-    document.getElementById('deskImg').src = data.img;
+    // --- INJECT DATA TO ALL CONTAINERS ---
+    // Inject ke class .desk-class, .desk-name, dll (Universal Selector)
+    document.querySelectorAll('.desk-class').forEach(el => el.innerText = data.class);
+    document.querySelectorAll('.desk-desc').forEach(el => el.innerText = data.desc);
+    document.querySelectorAll('.desk-stats').forEach(el => el.innerHTML = statsHtml);
+    document.querySelectorAll('.desk-name').forEach(el => el.innerText = data.name);
+    document.querySelectorAll('.desk-img').forEach(el => el.src = data.img);
 
-    const deskEquip = document.getElementById('deskEquip');
-    deskEquip.innerHTML = '';
-    deskEquip.appendChild(elFrag.cloneNode(true));
+    // Inject Elements ke container equipment desktop
+    document.querySelectorAll('.desk-equip-container').forEach(el => {
+        el.innerHTML = '';
+        el.appendChild(elFrag.cloneNode(true));
+    });
 
     // --- MOBILE INJECTION ---
     document.getElementById('mobName').innerText = data.name;
@@ -113,8 +161,10 @@ function loadContent(theme) {
     document.getElementById('mobImg').src = data.img;
     
     const mobEquip = document.getElementById('mobEquip');
-    mobEquip.innerHTML = '';
-    mobEquip.appendChild(elFrag.cloneNode(true));
+    if(mobEquip) {
+        mobEquip.innerHTML = '';
+        mobEquip.appendChild(elFrag.cloneNode(true));
+    }
 
     document.getElementById('mobDesc').innerText = data.desc;
     document.getElementById('mobStats').innerHTML = statsHtml;
@@ -123,7 +173,7 @@ function loadContent(theme) {
 // POPUP & UI FUNCTIONS
 function toggleMobMenu(forceState) {
     const menu = document.getElementById('mobDropdown');
-    menu.classList.toggle('active', forceState);
+    if(menu) menu.classList.toggle('active', forceState);
 }
 
 function openBioPopup(event) {

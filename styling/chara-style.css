@@ -38,18 +38,20 @@ header {
     transition: 0.3s; color: #1e1e24; text-decoration: none;
     display: inline-flex; align-items: center; font-size: 0.85rem;
 }
-.nav-btn:hover { transform: translateY(-2px); background: white; }
+.nav-btn:hover { transform: translateY(-2px); background: var(--theme-primary); color: var(--theme-bg); }
 
-/* Theme Switchers */
 .theme-switcher-desktop { display: flex; gap: 10px; }
 .palette-btn { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 2px solid rgba(255,255,255,0.5); transition: 0.3s; }
 .palette-btn:hover { transform: scale(1.15); }
-.p-gold { background: #D4AF37; } .p-white { background: #FFFFFF; } .p-red { background: #C0392B; }
+.p-gold { background: #D4AF37; } .p-white { background: #ffffff; } .p-red { background: #C0392B; }
 
 .theme-switcher-mobile { display: none; position: relative; }
-.current-palette { width: 32px; height: 32px; border-radius: 50%; border: 2px solid white; cursor: pointer; }
+.current-palette { width: 32px; height: 32px; border-radius: 50%; border: 2px solid white; cursor: pointer; position: relative; z-index: 2; }
+.current-palette::after { content: ""; position: absolute; inset: 0; border-radius: 50%; transform: scale(1.3); box-shadow: 0 0 6px rgba(212, 175, 55, 0.4), 0 0 12px rgba(212, 175, 55, 0.3); animation: glowPulse 2.4s infinite ease-in-out; }
+
+
 .mobile-dropdown {
-    position: absolute; top: 40px; right: -5px; background: white; padding: 8px;
+    position: absolute; top: 40px; right: -5px; background: #eeeeee; padding: 8px;
     border-radius: 12px; display: flex; flex-direction: column; gap: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1); opacity: 0; visibility: hidden;
     transform: translateY(-10px); transition: 0.3s;
@@ -57,104 +59,104 @@ header {
 .mobile-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
 
 /* ==================== 3. ANIMATIONS ==================== */
+@keyframes glowPulse {
+    0% {
+        opacity: 0.4;
+        box-shadow: 0 0 6px rgba(212, 175, 55, 0.35),
+        0 0 12px rgba(212, 175, 55, 0.25);
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 16px rgba(212, 175, 55, 0.9),
+        0 0 28px rgba(212, 175, 55, 0.55);
+    }
+    100% {
+        opacity: 0.35;
+        box-shadow: 0 0 16px rgba(212, 175, 55, 0.35),
+        0 0 12px rgba(212, 175, 55, 0.25);
+    }
+}
 .anim-exit { opacity: 0 !important; transform: scale(0.95) translateY(-20px) !important; filter: blur(4px); }
 .anim-target { transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1); transform: scale(1) translateY(0); opacity: 1; filter: blur(0); }
 
-/* ==================== 4. SHARED COMPONENTS ==================== */
+/* ==================== 4. DESKTOP LAYOUTS ==================== */
+main {
+    padding-top: var(--header-h); min-height: 100vh;
+    display: flex; justify-content: center; align-items: center;
+}
+
+#desktopWrapper { width: 95%; max-width: 1300px; height: 80vh; }
+
+/* --- A. STANDARD LAYOUT (Gold & White) --- */
+.desktop-layout-std {
+    display: flex; height: 100%; gap: 30px; align-items: center;
+}
+
+.std-sec-info { flex: 0 0 320px; height: 100%; } /* Fixed Width Info */
+.std-sec-center { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; }
+.std-sec-equip { flex: 0 0 90px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
+
+.char-name-std { font-size: 3.5rem; font-weight: 900; text-transform: uppercase; color: var(--theme-primary); line-height: 1; text-align: center; }
+.std-img-box { flex: 1; display: flex; align-items: center; justify-content: center; width: 100%; overflow: hidden; }
+
+/* --- B. RED LAYOUT (Custom 2 Section) --- */
+.desktop-layout-red {
+    display: flex; height: 100%; gap: 10px; position: relative;
+}
+
+/* Kiri: Equip (Top) + Info (Bottom) */
+.red-sec-left { flex: 0 0 380px; display: flex; flex-direction: column; gap: 20px; }
+.red-equip-row { display: flex; gap: 15px; } /* Horizontal Equip */
+.red-panel-style { flex: 1; border: none !important; box-shadow: none !important; }
+
+/* Kanan: Image (Top) + Name (Bottom) */
+.red-sec-mid { flex: 1; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
+.red-sec-right {
+    position: absolute;
+    right: -22vh;
+    top: 30vh;
+    transform: rotate(90deg);
+}
+.red-img-box { flex: 1; width: 60%; display: flex; justify-content: center; align-items: center; }
+.char-name-red { font-size: 5rem; font-weight: 900; text-transform: uppercase; color: red; line-height: 1; text-align: right; }
+
+/* Common Elements */
 .info-panel-content {
     background: rgba(255,255,255,0.6); backdrop-filter: blur(10px);
     border-radius: var(--radius); padding: var(--card-padding);
     height: 100%; display: flex; flex-direction: column; gap: 1rem;
     border: 1px solid rgba(255,255,255,0.4); overflow-y: auto;
 }
+body[data-theme="white"] .info-panel-content { background: rgba(255,255,255,0.3); border-left: 1px solid white; }
+body[data-theme="white"] .std-sec-equip { order: 1; }
+body[data-theme="white"] .std-sec-center { order: 2; }
+body[data-theme="white"] .std-sec-info { order: 3; }
 
-.char-class-text { font-size: 1rem; color: #666; font-style: italic; font-weight: 600; border-bottom: 2px solid var(--theme-primary); display: inline-block; padding-bottom: 5px;}
-.char-name-big { font-size: 3rem; font-weight: 900; text-transform: uppercase; color: var(--theme-primary); line-height: 1; }
+.char-class-text { font-size: 1rem; color: #666; font-style: italic; font-weight: 600; border-bottom: 2px solid var(--theme-primary); display: inline-block; padding-bottom: 5px; }
 .desc-box-text { font-size: 0.85rem; line-height: 1.6; color: #444; }
-
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.85rem; }
 .stat-row { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 5px 0; }
 .stat-label { font-weight: 600; color: #888; }
 .stat-val { font-weight: 700; color: #1e1e24; }
+.desk-img { max-height: 80%; max-width: 100%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); }
 
-/* Elements / Icons */
 .col-item {
     width: 65px; height: 65px; background: white; border-radius: 18px;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition: 0.3s; position: relative; padding: 8px;
+    transition: 0.3s; padding: 8px; position: relative;
 }
 .col-item:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(var(--theme-primary), 0.5); }
 .col-item img { width: 100%; height: 100%; object-fit: contain; }
 
-/* ==================== 5. DESKTOP GRID LAYOUTS ==================== */
-main {
-    padding-top: var(--header-h); min-height: 100vh;
-    display: flex; justify-content: center; align-items: center;
-}
 
-.desktop-layout {
-    display: grid; width: 95%; max-width: 1300px; height: 80vh; gap: 25px;
-}
-
-.area-info { grid-area: info; }
-.area-name { grid-area: name; text-align: center; }
-.area-image { grid-area: image; align-items: center; }
-.area-equip { grid-area: equip; display: flex; gap: 15px; }
-.char-img-style { max-height: 70vh; max-width: 100%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.2)); }
-
-/* --- A. Layout GOLD & WHITE (3 Col) --- */
-/* Grid: [Info] [Name/Image] [Equip] */
-body:not([data-theme="red"]) .desktop-layout {
-    grid-template-columns: 320px 1fr 90px;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: 
-        "info name  equip"
-        "info image equip";
-}
-
-body:not([data-theme="red"]) .area-name { align-items: flex-end; padding-bottom: 10px; }
-body:not([data-theme="red"]) .area-equip { flex-direction: column; justify-content: center; }
-
-/* White Specific (Glass Effect) */
-body[data-theme="white"] .info-panel-content {
-    background: rgba(255,255,255,0.3);
-    border-left: 1px solid white;
-}
-
-/* --- B. Layout RED (2 Col) --- */
-/* Grid: [Left: Equip+Info] [Right: Image+Name] */
-body[data-theme="red"] .desktop-layout {
-    grid-template-columns: 350px 1fr;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: 
-        "equip image"
-        "info  name";
-}
-
-body[data-theme="red"] .area-equip { 
-    flex-direction: row; margin-bottom: 20px; /* Horizontal Equip */
-}
-body[data-theme="red"] .info-panel-content {
-    background: transparent; border: none; padding-left: 0; box-shadow: none;
-}
-body[data-theme="red"]
-body[data-theme="red"] .area-name { 
-    justify-content: flex-end; align-items: flex-start; 
-}
-body[data-theme="red"] .char-name-big { 
-    font-size: 5rem; text-align: right; color: var(--c-red); 
-}
-body[data-theme="red"] .char-img-style { max-height: 60vh; }
-
-
-/* ==================== 6. MOBILE LAYOUT ==================== */
+/* ==================== 5. MOBILE LAYOUT ==================== */
 .mobile-layout-wrapper { display: none; }
 
 @media (max-width: 768px) {
     .theme-switcher-desktop { display: none; }
     .theme-switcher-mobile { display: block; }
-    .desktop-layout { display: none; }
+    #desktopWrapper { display: none; }
     
     main { align-items: flex-start; height: auto; padding-top: 80px; }
 
@@ -163,12 +165,12 @@ body[data-theme="red"] .char-img-style { max-height: 60vh; }
         width: 100%; padding: 0 1.5rem;
     }
 
-    /* 1. Header (Outside Card) */
-    .mob-header-section { text-align: left; }
+    /* Header */
+    .mob-header-section { text-align: center; }
     .mob-char-name { font-size: 2.2rem; font-weight: 900; line-height: 1; text-transform: uppercase; color: var(--theme-primary); }
     .mob-char-class { font-size: 0.9rem; font-style: italic; color: #666; }
 
-    /* 2. Flipper Card */
+    /* Flipper Card */
     .flip-container { perspective: 1000px; width: 100%; height: 500px; position: relative; }
     .flipper {
         transition: 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
@@ -186,8 +188,10 @@ body[data-theme="red"] .char-img-style { max-height: 60vh; }
         padding: 20px; box-sizing: border-box;
     }
 
-    /* --- Front Face Layout (Flex Row) --- */
+    /* FRONT FACE: Flex Row */
     .front { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    body[data-theme="red"] .front { flex-direction: column; }
+    body[data-theme="gold"] .front { flex-direction: column; }
     
     .mob-front-img { flex: 1; display: flex; justify-content: center; height: 100%; }
     .mob-front-img img { max-height: 90%; max-width: 100%; object-fit: contain; align-self: center; }
@@ -196,31 +200,31 @@ body[data-theme="red"] .char-img-style { max-height: 60vh; }
         display: flex; flex-direction: column; gap: 15px; justify-content: center; 
         width: 70px; /* Fixed width for icon column */
     }
+    body[data-theme="red"] .mob-front-equip { flex-direction: row; width: 100%; padding-bottom: 20%; }
+    body[data-theme="gold"] .mob-front-equip { flex-direction: row; width: 100%; }
 
-    /* ORDERING RULES */
-    /* Gold: Equip | Image */
+    /* ORDERING RULES (Mobile) */
+    /* Gold: Equip Left, Img Right */
     body[data-theme="gold"] .mob-front-equip { order: 1; }
     body[data-theme="gold"] .mob-front-img { order: 2; }
     
-    /* White & Red: Image | Equip */
+    /* White & Red: Img Left, Equip Right */
     body[data-theme="white"] .mob-front-equip,
     body[data-theme="red"] .mob-front-equip { order: 2; }
     
     body[data-theme="white"] .mob-front-img,
     body[data-theme="red"] .mob-front-img { order: 1; }
 
-
     .flip-hint { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: #888; opacity: 0.7; }
 
-    /* --- Back Face Layout --- */
+    /* Back Face */
     .back { transform: rotateY(180deg); background: white; overflow-y: auto; display: flex; flex-direction: column; justify-content: center;}
 
-    /* 3. Spacer */
-    .mobile-spacer { height: 100px; border-top: 1px dashed rgba(0,0,0,0.1); margin-top: 1rem; position: relative; }
-    .mobile-spacer::after { content: 'Future Content Area'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #ccc; font-size: 0.8rem; }
+    /* Spacer */
+    .mobile-spacer { height: 100px; border-top: 1px dashed rgba(0,0,0,0.1); margin-top: 1rem; }
 }
 
-/* ==================== 7. POPUPS ==================== */
+/* ==================== 6. POPUPS ==================== */
 .popup-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.6); z-index: 999;

@@ -326,6 +326,8 @@
         .char-img-box {
             height: 250px;
             width: 100%;
+            display: flex;
+            justify-content: center;
             border-radius: 15px;
             overflow: hidden;
             margin-bottom: 15px;
@@ -333,9 +335,12 @@
         }
         
         .char-img-box img {
-            width: 100%;
             height: 100%;
             object-fit: cover; /* Pastikan gambar full */
+        }
+
+        .c-putih img {
+            width: 100%;
         }
 
         .char-info h3 { font-size: 1.2rem; margin-bottom: 5px; }

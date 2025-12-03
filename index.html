@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <link rel="stylesheet" href="styling/style.css">
-    <link rel="Icon" type="img/png" href="pictures/UNG-icon.png">
+    <link rel="Icon" type="img/png" href="./pictures/UNG-icon.png">
 </head>
 <body>
 
@@ -30,9 +30,9 @@
             
             <!-- Dropdown Menu -->
             <ul class="dropdown-menu" id="dropdown">
-                <li><a href="pages/char-test.html" class="dropdown-item">Karawo</a></li>
-                <li><a href="pages/karakter.html" class="dropdown-item">Karakter</a></li>
-                <li><a href="pages/kitorang.html" class="dropdown-item">Kitorang</a></li>
+                <li><a href="./pages/karawo.html" class="dropdown-item">Karawo</a></li>
+                <li><a href="./pages/karakter.html" class="dropdown-item">Karakter</a></li>
+                <li><a href="./pages/kitorang.html" class="dropdown-item">Kitorang</a></li>
             </ul>
         </div>
     </header>
@@ -44,7 +44,7 @@
         <section class="hero-section">
             <div class="hero-image-box">
                 <!-- Ganti src dengan file asli: Tekmul-UAS-Result.jpg -->
-                <img src="pictures/Tekmul-UAS-Result.jpg" alt="Tiga Benang Kehidupan" onerror="this.src='https://placehold.co/600x600?text=Gambar+Utama'">
+                <img src="./pictures/Tekmul-UAS-Result.jpg" alt="Tiga Benang Kehidupan" onerror="this.src='https://placehold.co/600x600?text=Gambar+Utama'">
             </div>
             <div class="hero-content">
                 <span class="hero-tag">Alkisah Para Benang</span>
@@ -71,9 +71,9 @@
 
                     <div class="cards-wrapper">
                         <!-- Card 1: Emas -->
-                        <div class="char-card gold" onclick="openDetail('Emas')">
+                        <div class="char-card gold" onclick="openDetail('gold')">
                             <div class="char-img-box">
-                                <img src="pictures/si_emas.jpg" alt="Si Emas" onerror="this.src='https://placehold.co/300x400/D4AF37/FFF?text=Si+Emas'">
+                                <img src="./pictures/si_hulawa.png" alt="Si Emas" onerror="this.src='https://placehold.co/300x400/D4AF37/FFF?text=Si+Emas'">
                             </div>
                             <div class="char-info">
                                 <h3>Si Emas</h3>
@@ -82,9 +82,9 @@
                         </div>
 
                         <!-- Card 2: Putih -->
-                        <div class="char-card white" onclick="openDetail('Putih')">
-                            <div class="char-img-box">
-                                <img src="pictures/si_putih.jpg" alt="Si Putih" onerror="this.src='https://placehold.co/300x400/EEE/333?text=Si+Putih'">
+                        <div class="char-card white" onclick="openDetail('white')">
+                            <div class="char-img-box c-putih">
+                                <img src="./pictures/putih.png" alt="Si Putih" onerror="this.src='https://placehold.co/300x400/EEE/333?text=Si+Putih'">
                             </div>
                             <div class="char-info">
                                 <h3>Si Putih</h3>
@@ -93,9 +93,9 @@
                         </div>
 
                         <!-- Card 3: Merah -->
-                        <div class="char-card red" onclick="openDetail('Merah')">
+                        <div class="char-card red" onclick="openDetail('red')">
                             <div class="char-img-box">
-                                <img src="pictures/si_merah.jpg" alt="Si Merah" onerror="this.src='https://placehold.co/300x400/C0392B/FFF?text=Si+Merah'">
+                                <img src="./pictures/merah.png" alt="Si Merah" onerror="this.src='https://placehold.co/300x400/C0392B/FFF?text=Si+Merah'">
                             </div>
                             <div class="char-info">
                                 <h3>Si Lamutu</h3>
@@ -141,21 +141,23 @@
             <!-- Robby -->
             <a href="https://github.com/RobbyDarmawann" target="_blank" class="creator-profile" title="RobbyDarmawann">
                 <div class="profile-pic" style="background-color: var(--c-gold);">
-                    <img src="pictures/rPP.png" alt="profile-picture">
+                    <img src="./pictures/rPP.jpg" alt="profile-picture">
                 </div>
                 <span class="creator-name">Robby</span>
             </a>
             
             <!-- Eka -->
             <a href="https://github.com/EkaAyuu" target="_blank" class="creator-profile" title="EkaAyuu">
-                <div class="profile-pic" style="background-color: #999;">E</div>
+                <div class="profile-pic" style="background-color: #999;">
+                    <img src="./pictures/ePP.jpg" alt="profile-picture">
+                </div>
                 <span class="creator-name">Eka</span>
             </a>
             
             <!-- Ihsan -->
             <a href="https://github.com/Etherveo" target="_blank" class="creator-profile"  title="Etherveo">
                 <div class="profile-pic" style="background-color: var(--c-red);">
-                    <img src="pictures/iPP.jpg" alt="profile-picture">
+                    <img src="./pictures/iPP.jpg" alt="profile-picture">
                 </div>
                 <span class="creator-name">Ihsan</span>
             </a>
@@ -163,6 +165,6 @@
         <p style="margin-top: 2rem; font-size: 0.8rem; color: #aaa;">&copy; 2025 Tiga Benang Kehidupan. All rights reserved.</p>
     </footer>
 
-    <script src="behavior/script.js"></script>
+    <script src="./behavior/script.js"></script>
 </body>
 </html>

@@ -37,8 +37,8 @@
         });
 
         // 3. Card Interaction Mockup
-        function openDetail(name) {
-            // Nanti bisa diganti dengan link halaman beneran
-            // alert(`Membuka profil: ${name}`);
-            console.log(`Navigasi ke profil ${name}`);
+        function openDetail(charName) {
+            // charName harus: 'gold', 'white', atau 'red' (sesuai key di charData nanti)
+            // Kita pindah halaman sambil bawa parameter ?theme=...
+            window.location.href = `./pages/karakter.html?theme=${charName}`;
         }

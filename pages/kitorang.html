@@ -1,132 +1,21 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Info Karakter</title>
-    
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- CSS Link -->
-    <link rel="stylesheet" href="../styling/kitorang-style.css">
-    <link rel="icon" type="image/png" href="../pictures/UNG-icon.png">
+    <title>Tentang Torang</title>
 </head>
-<body data-theme="gold">
-
-    <!-- === HEADER === -->
+<body>
     <header>
-        <div class="nav-left">
-            <a href="../index.html" class="nav-btn"><i class="fas fa-arrow-left me-2"></i> Back</a>
-            <a href="../pages/karawo.html" class="nav-btn">Karawo</a>
-            <a href="../pages/kitorang.html" class="nav-btn">Kitorang</a>
-        </div>
 
-        <!-- Desktop Theme Switcher -->
-        <div class="theme-switcher-desktop">
-            <div class="palette-btn p-gold" onclick="switchTheme('gold')" title="Si Emas"></div>
-            <div class="palette-btn p-white" onclick="switchTheme('white')" title="Si Putih"></div>
-            <div class="palette-btn p-red" onclick="switchTheme('red')" title="Si Merah"></div>
-        </div>
-
-        <!-- Mobile Theme Switcher -->
-        <div class="theme-switcher-mobile">
-            <div class="current-palette p-gold" id="mobPaletteBtn" onclick="toggleMobMenu()"></div>
-            <div class="mobile-dropdown" id="mobDropdown">
-                <div class="palette-btn p-gold" onclick="switchTheme('gold')"></div>
-                <div class="palette-btn p-white" onclick="switchTheme('white')"></div>
-                <div class="palette-btn p-red" onclick="switchTheme('red')"></div>
-            </div>
-        </div>
     </header>
 
     <main>
-        <!-- ================= DESKTOP LAYOUT CONTAINER ================= -->
-        <div class="desktop-layout anim-target" id="desktopContainer">
-            
-            <!-- Area: INFO PANEL -->
-            <section class="area-info">
-                <div class="info-panel-content" id="desktopInfoContent">
-                    <!-- Populated by JS -->
-                </div>
-            </section>
-
-            <!-- Area: IMAGE -->
-            <section class="area-image">
-                <img src="" alt="Character" class="char-img-style" id="desktopCharImg">
-            </section>
-
-            <!-- Area: ELEMENTS (Collection) -->
-            <section class="area-elements" id="desktopElements">
-                <!-- Populated by JS -->
-            </section>
-
-            <!-- Area: NAME (Khusus Red Desktop) -->
-            <section class="area-name-red desktop-only" style="display: none;" id="redNameArea">
-                <h1 class="red-desktop-name">SI MERAH</h1>
-            </section>
-        </div>
-
-        <!-- ================= MOBILE LAYOUT CONTAINER (Flipper) ================= -->
-        <div class="mobile-layout-wrapper anim-target" id="mobileContainer">
-            <div class="flip-container" id="mobFlipper" onclick="this.classList.toggle('flipped')">
-                <div class="flipper">
-                    <!-- Front Face: Elements & Image Row -->
-                    <div class="flip-face front">
-                        <div class="mob-elements-col" id="mobElements">
-                            <!-- Populated by JS -->
-                        </div>
-                        <div class="mob-image-col">
-                            <img src="" alt="Character" id="mobCharImg">
-                        </div>
-                        <!-- Hint -->
-                        <div style="position:absolute; bottom:10px; left:50%; transform:translateX(-50%); font-size:0.7rem; opacity:0.6;"><i class="fas fa-sync"></i> Tap to flip</div>
-                    </div>
-                    
-                    <!-- Back Face: Stats Info -->
-                    <div class="flip-face back" id="mobInfoContent">
-                         <!-- Populated by JS -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- === KHUSUS MOBILE RED (STATS ONLY) === -->
-        <!-- Ini layout spesial buat si Merah di mobile biar ga aneh -->
-        <div class="mobile-red-stats mobile-only anim-element" id="mobileRedStats" style="display:none;">
-            <!-- Content copied here for Red Mobile -->
-        </div>
-        <img src="" id="mobileRedFixedImg" class="char-red-mobile-fixed" style="display:none;">
 
     </main>
 
-    <!-- TEMPLATES: Note penambahan event di onclick -->
-    <template id="tmpl-elements">
-        <div class="col-item" onclick="openBioPopup(event)">
-            <img src="" class="col-img-face" style="border-radius: 14px;">
-        </div>
-        <div class="col-item" onclick="openWeaponPopup(0, event)">
-            <img src="" class="icon-w1" style="border-radius: 14px;">
-        </div>
-        <div class="col-item" onclick="openWeaponPopup(1, event)">
-            <img src="" class="icon-w2" style="border-radius: 14px;">
-        </div>
-    </template>
-
-    <!-- === POPUPS === -->
-    <div class="popup-overlay" id="popupOverlay" onclick="closePopup(event)">
-        <div class="popup-card">
-            <span class="popup-close" onclick="closePopupButton()">&times;</span>
-            <div id="popupContent">
-                <!-- Dynamic Content -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Script Link -->
-    <script src="../behavior/kiotrang-script.js"></script>
+    <footer>
+        
+    </footer>
 </body>
 </html>
