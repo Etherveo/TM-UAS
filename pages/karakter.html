@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- CSS Link -->
-    <link rel="stylesheet" href="../styling/chara-style.css">
+    <link rel="stylesheet" href="../styling/white-style.css">
     <link rel="icon" type="image/png" href="../pictures/UNG-icon.png">
 </head>
 <body data-theme="gold">
@@ -42,40 +42,80 @@
     </header>
 
     <main>
-        <!-- ================= DESKTOP LAYOUT (Grid Areas) ================= -->
-        <div class="desktop-layout anim-target" id="desktopContainer">
+        <!-- Wrapper Desktop untuk Animasi -->
+        <div id="desktopWrapper" class="anim-target">
             
-            <!-- 1. INFO PANEL (Left) -->
-            <section class="area-info">
-                <div class="info-panel-content">
-                    <div class="char-header-text">
-                        <span class="char-class-text" id="deskClass">Class Name</span>
+            <!-- LAYOUT A: STANDARD (GOLD & WHITE) - 3 Section Horizontal -->
+            <!-- Struktur: [Info] | [Name + Image] | [Equip] -->
+            <div id="desktop-standard" class="desktop-layout-std">
+                
+                <!-- Section 1: Info -->
+                <section class="std-sec-info">
+                    <div class="info-panel-content">
+                        <div class="char-header-text">
+                            <span class="char-class-text desk-class">Class Name</span>
+                        </div>
+                        <div class="desc-box-text desk-desc">Description...</div>
+                        <div class="stats-grid desk-stats">
+                            <!-- Stats Injected Here -->
+                        </div>
                     </div>
-                    <div class="desc-box-text" id="deskDesc">Description...</div>
-                    <div class="stats-grid" id="deskStats">
-                        <!-- Stats Injected Here -->
+                </section>
+
+                <!-- Section 2: Name & Image -->
+                <section class="std-sec-center">
+                    <h1 class="char-name-std desk-name">NAMA CHAR</h1>
+                    <div class="std-img-box">
+                        <img src="" alt="Character" class="desk-img">
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- 2. NAME (Center Top / Right Bottom) -->
-            <section class="area-name">
-                <h1 class="char-name-big" id="deskName">SI EMAS</h1>
-            </section>
+                <!-- Section 3: Equipment (Vertical) -->
+                <section class="std-sec-equip desk-equip-container">
+                    <!-- Equip Elements Injected Here -->
+                </section>
+            </div>
 
-            <!-- 3. IMAGE (Center Bottom / Right Top) -->
-            <section class="area-image">
-                <img src="" alt="Character" class="char-img-style" id="deskImg">
-            </section>
 
-            <!-- 4. EQUIPMENT (Right / Left Top) -->
-            <section class="area-equip" id="deskEquip">
-                <!-- Elements Injected Here -->
-            </section>
+            <!-- LAYOUT B: RED SPECIAL - 2 Section Horizontal -->
+            <!-- Struktur: [Left: Equip(Row) + Info] | [Right: Image + Name] -->
+            <div id="desktop-red" class="desktop-layout-red" style="display: none;">
+                
+                <!-- Section Kiri -->
+                <section class="red-sec-left">
+                    <!-- Equip Row -->
+                    <div class="red-equip-row desk-equip-container">
+                        <!-- Equip Elements Injected Here -->
+                    </div>
+                    <!-- Info Panel -->
+                    <div class="info-panel-content red-panel-style">
+                        <div class="char-header-text">
+                            <span class="char-class-text desk-class">Class Name</span>
+                        </div>
+                        <div class="desc-box-text desk-desc">Description...</div>
+                        <div class="stats-grid desk-stats">
+                            <!-- Stats Injected Here -->
+                        </div>
+                    </div>
+                </section>
 
-        </div>
+                <!-- Section Tengah -->
+                <section class="red-sec-mid">
+                    <div class="red-img-box">
+                        <img src="" alt="Character" class="desk-img">
+                    </div>
+                </section>
 
-        <!-- ================= MOBILE LAYOUT (Flipper Universal) ================= -->
+                <!-- Section Kanan -->
+                <section class="red-sec-right">
+                    <h1 class="char-name-red desk-name">SI MERAH</h1>
+                </section>
+            </div>
+
+        </div> <!-- End Desktop Wrapper -->
+
+
+        <!-- ================= MOBILE LAYOUT (UNIVERSAL) ================= -->
         <div class="mobile-layout-wrapper anim-target" id="mobileContainer">
             
             <!-- Mobile Header (Outside Card) -->
@@ -90,11 +130,10 @@
                     
                     <!-- Front: Image & Equip -->
                     <div class="flip-face front">
-                        <!-- Image Container -->
+                        <!-- Container fleksibel diatur CSS order-nya -->
                         <div class="mob-front-img">
                             <img src="" id="mobImg">
                         </div>
-                        <!-- Equipment Container (Vertical Stack) -->
                         <div class="mob-front-equip" id="mobEquip">
                             <!-- Icons Injected Here -->
                         </div>
@@ -111,10 +150,8 @@
                 </div>
             </div>
 
-            <!-- Spacer for future content -->
-            <div class="mobile-spacer">
-                <!-- Area kosong buat lo nambahin sesuatu nanti -->
-            </div>
+            <!-- Spacer -->
+            <div class="mobile-spacer"></div>
 
         </div>
 
@@ -122,7 +159,7 @@
 
     <!-- TEMPLATES -->
     <template id="tmpl-elements">
-        <div class="col-item" onclick="openBioPopup(event)">
+        <div class="col-item" onclick="openWeaponPopup(2, event)">
             <img src="" class="col-img-face">
         </div>
         <div class="col-item" onclick="openWeaponPopup(0, event)">
@@ -141,6 +178,6 @@
         </div>
     </div>
 
-    <script src="../behavior/chara-script.js"></script>
+    <script src="../behavior/white-script.js"></script>
 </body>
 </html>

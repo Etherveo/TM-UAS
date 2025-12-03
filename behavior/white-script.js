@@ -1,24 +1,26 @@
 // === DATA KARAKTER ===
 const charData = {
     gold: {
-        theme: 'gold', color: '#D4AF37', bg: '#F9F3E0', img: '../pictures/emas.png',
+        theme: 'gold', color: '#D4AF37', bg: '#F9F3E0', img: '../pictures/si_hulawa.png',
         name: "SI EMAS", class: "The Visionary Planner",
         desc: "Perencana ulung yang melihat masa depan dalam selembar kertas kosong. Imajinasinya adalah cetak biru realitas.",
-        stats: { lvl: 50, exp: 15000, hp: 4000, mp: 1200, acc: "98%", agi: 60, crit: "30%", ras: "Mummy", age: "3000+" },
+        stats: { lvl: 50, exp: 15000, hp: 4000, mp: 1200, acc: "98%", agi: 60, crit: "30%", ras: "Benang", age: "3000+" },
         weapons: [
             { name: "Eternal Pencil", stat: "ATK +50", skill: "Reality Drawing: Apa yang digambar menjadi nyata selama 10 detik.", icon: '../pictures/pensil.png' },
-            { name: "Blueprint Paper", stat: "DEF +30", skill: "Strategic Shield: Mengurangi damage sebesar 50% saat merencanakan serangan.", icon: '../pictures/kertas.png' }
+            { name: "Blueprint Paper", stat: "MP +500", skill: "Strategic Magic Scroll: Menambah MP sebesar 41,67% saat mulai menggambar.", icon: '../pictures/kertas.png' },
+            { name: "Holy Mantle", stat: "DEF +30", skill: "Flexible Shield: Mengurangi damage sebesar 50% saat merencanakan serangan.", icon: '../pictures/gold-mantel.png' }
         ],
-        bio: "Si Emas lahir dari benang emas kerajaan kuno. Ia percaya bahwa takdir tidak ditulis oleh dewa, tapi digambar oleh diri sendiri."
+        bio: "Si Hulawa lahir dari benang emas kerajaan kuno. Ia percaya bahwa takdir tidak ditulis oleh dewa, tapi digambar oleh diri sendiri."
     },
     white: {
         theme: 'white', color: '#333', bg: '#dde1e7', img: '../pictures/putih.png',
         name: "SI PUTIH", class: "Perfectionist Soul",
         desc: "Presisi adalah segalanya. Tidak ada jahitan yang meleset. Hidup adalah tentang kesempurnaan absolut.",
-        stats: { lvl: 55, exp: 18000, hp: 3200, mp: 900, acc: "100%", agi: 85, crit: "70%", ras: "Mummy", age: "2800+" },
+        stats: { lvl: 55, exp: 18000, hp: 3200, mp: 900, acc: "100%", agi: 85, crit: "70%", ras: "Benang", age: "2800+" },
         weapons: [
             { name: "Silver Needle", stat: "Pierce +80", skill: "Thread of Fate: Menjahit bayangan musuh, menghentikan pergerakan mereka.", icon: '../pictures/jarum.png' },
-            { name: "Razor Blade", stat: "Crit +40%", skill: "Clean Cut: Memotong pertahanan musuh, mengabaikan 100% armor.", icon: '../pictures/silet.png' }
+            { name: "Razor Blade", stat: "Crit +40%", skill: "Clean Cut: Memotong pertahanan musuh, mengabaikan 100% armor.", icon: '../pictures/silet.png' },
+            { name: "Holy Mantle", stat: "DEF +30", skill: "Flexible Shield: Mengurangi damage sebesar 50% saat merencanakan serangan.", icon: '../pictures/gold-mantel.png' }
         ],
         bio: "Si Putih dulunya adalah kepala penjahit istana yang diasingkan karena terlalu obsesif. Ia mencari kain legendaris yang konon bisa membungkus waktu."
     },
@@ -26,10 +28,11 @@ const charData = {
         theme: 'red', color: '#C0392B', bg: '#EADBD9', img: '../pictures/merah.png',
         name: "SI MERAH", class: "Brave Heart",
         desc: "Keberanian membara dalam serat benang merah. Bertarung bukan untuk menang, tapi untuk melindungi ikatan.",
-        stats: { lvl: 60, exp: 22000, hp: 5500, mp: 600, acc: "80%", agi: 90, crit: "50%", ras: "Mummy", age: "2500+" },
+        stats: { lvl: 60, exp: 22000, hp: 5500, mp: 600, acc: "80%", agi: 90, crit: "50%", ras: "Benang", age: "2500+" },
         weapons: [
             { name: "Blood Needle", stat: "Lifesteal +20%", skill: "Stitch Healing: Menjahit luka sendiri secara instan.", icon: '../pictures/magic_jarum.png' },
-            { name: "Red Thread", stat: "Range +100", skill: "Puppet Master: Mengendalikan pergerakan lawan dengan benang merah.", icon: '../pictures/the_string.png' }
+            { name: "Red Thread", stat: "Range +100", skill: "Puppet Master: Mengendalikan pergerakan lawan dengan benang merah.", icon: '../pictures/the_string.png' },
+            { name: "Holy Mantle", stat: "DEF +30", skill: "Flexible Shield: Mengurangi damage sebesar 50% saat merencanakan serangan.", icon: '../pictures/gold-mantel.png' }
         ],
         bio: "Si Merah adalah prajurit garis depan. Benang merahnya konon berasal dari darah naga. Ia bertarung bukan untuk menang, tapi untuk melindungi ikatan persahabatan."
     }
@@ -103,7 +106,7 @@ function loadContent(theme) {
     // 2. ELEMENTS HTML GEN
     const tmpl = document.getElementById('tmpl-elements');
     const elFrag = tmpl.content.cloneNode(true);
-    elFrag.querySelector('.col-img-face').src = data.img;
+    elFrag.querySelector('.col-img-face').src = data.weapons[2].icon;
     elFrag.querySelector('.icon-w1').src = data.weapons[0].icon;
     elFrag.querySelector('.icon-w2').src = data.weapons[1].icon;
 

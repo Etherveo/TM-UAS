@@ -43,12 +43,12 @@ header {
 .theme-switcher-desktop { display: flex; gap: 10px; }
 .palette-btn { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 2px solid rgba(255,255,255,0.5); transition: 0.3s; }
 .palette-btn:hover { transform: scale(1.15); }
-.p-gold { background: #D4AF37; } .p-white { background: #FFFFFF; } .p-red { background: #C0392B; }
+.p-gold { background: #D4AF37; } .p-white { background: #ffffff; } .p-red { background: #C0392B; }
 
 .theme-switcher-mobile { display: none; position: relative; }
 .current-palette { width: 32px; height: 32px; border-radius: 50%; border: 2px solid white; cursor: pointer; }
 .mobile-dropdown {
-    position: absolute; top: 40px; right: -5px; background: white; padding: 8px;
+    position: absolute; top: 40px; right: -5px; background: #eeeeee; padding: 8px;
     border-radius: 12px; display: flex; flex-direction: column; gap: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1); opacity: 0; visibility: hidden;
     transform: translateY(-10px); transition: 0.3s;
@@ -76,7 +76,7 @@ main {
 .std-sec-center { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; }
 .std-sec-equip { flex: 0 0 90px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
 
-.char-name-std { font-size: 3.5rem; font-weight: 900; text-transform: uppercase; color: white; line-height: 1; text-align: center; }
+.char-name-std { font-size: 3.5rem; font-weight: 900; text-transform: uppercase; color: var(--theme-primary); line-height: 1; text-align: center; }
 .std-img-box { flex: 1; display: flex; align-items: center; justify-content: center; width: 100%; overflow: hidden; }
 
 /* --- B. RED LAYOUT (Custom 2 Section) --- */
@@ -87,7 +87,7 @@ main {
 /* Kiri: Equip (Top) + Info (Bottom) */
 .red-sec-left { flex: 0 0 380px; display: flex; flex-direction: column; gap: 20px; }
 .red-equip-row { display: flex; gap: 15px; } /* Horizontal Equip */
-.red-panel-style { flex: 1; background: transparent !important; border: none !important; padding-left: 0 !important; box-shadow: none !important; }
+.red-panel-style { flex: 1; border: none !important; box-shadow: none !important; }
 
 /* Kanan: Image (Top) + Name (Bottom) */
 .red-sec-mid { flex: 1; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
@@ -167,6 +167,8 @@ body[data-theme="white"] .info-panel-content { background: rgba(255,255,255,0.3)
 
     /* FRONT FACE: Flex Row */
     .front { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    body[data-theme="red"] .front { flex-direction: column; }
+    body[data-theme="gold"] .front { flex-direction: column; }
     
     .mob-front-img { flex: 1; display: flex; justify-content: center; height: 100%; }
     .mob-front-img img { max-height: 90%; max-width: 100%; object-fit: contain; align-self: center; }
@@ -175,6 +177,8 @@ body[data-theme="white"] .info-panel-content { background: rgba(255,255,255,0.3)
         display: flex; flex-direction: column; gap: 15px; justify-content: center; 
         width: 70px; /* Fixed width for icon column */
     }
+    body[data-theme="red"] .mob-front-equip { flex-direction: row; width: 100%; padding-bottom: 20%; }
+    body[data-theme="gold"] .mob-front-equip { flex-direction: row; width: 100%; }
 
     /* ORDERING RULES (Mobile) */
     /* Gold: Equip Left, Img Right */
