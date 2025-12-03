@@ -3,29 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Character Details</title>
+    <title>Karakter - Tiga Benang Kehidupan</title>
     
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="Image/png" href="../pictures/UNG-icon.png">
-    <link rel="stylesheet" href="../styling/char-style.css">
+    
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="../styling/chara-style.css">
+    <link rel="icon" type="image/png" href="../pictures/UNG-icon.png">
 </head>
 <body data-theme="gold">
 
     <!-- === HEADER === -->
     <header>
         <div class="nav-left">
-            <a href="../index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Back</a>
-<<<<<<< HEAD
-            <a href="/pages/karawo.html" class="nav-btn">Karawo</a>
-            <a href="/pages/kitorang.html" class="nav-btn">Kitorang</a>
-=======
-            <a href="../pages/karawo.html" class="nav-btn">Karawo</a>
-            <a href="../pages/kitorang.html" class="nav-btn">Kitorang</a>
->>>>>>> 915a498d5057bab057ee18fb4b370738ddfec6f6
+            <a href="../index.html" class="nav-btn"><i class="fas fa-arrow-left me-2"></i> Back</a>
+            <a href="#" class="nav-btn">Karawo</a>
+            <a href="#" class="nav-btn">Kitorang</a>
         </div>
 
         <!-- Desktop Theme Switcher -->
@@ -37,8 +34,8 @@
 
         <!-- Mobile Theme Switcher -->
         <div class="theme-switcher-mobile">
-            <div class="current-palette p-gold" id="mobilePaletteToggle" onclick="toggleMobileMenu()"></div>
-            <div class="mobile-dropdown" id="mobileDropdown">
+            <div class="current-palette p-gold" id="mobPaletteBtn" onclick="toggleMobMenu()"></div>
+            <div class="mobile-dropdown" id="mobDropdown">
                 <div class="palette-btn p-gold" onclick="switchTheme('gold')"></div>
                 <div class="palette-btn p-white" onclick="switchTheme('white')"></div>
                 <div class="palette-btn p-red" onclick="switchTheme('red')"></div>
@@ -46,94 +43,90 @@
         </div>
     </header>
 
-    <main id="mainContainer">
-        
-        <!-- === INFO PANEL (DESKTOP) & MOBILE BACKFACE SOURCE === -->
-        <section class="info-panel anim-element" id="infoPanel">
-            <div class="char-header">
-                <h1 class="char-name" id="charName">SI EMAS</h1>
-                <span class="char-class" id="charClass">The Visionary Planner</span>
-            </div>
-            <div class="desc-box" id="charDesc">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </div>
+    <main>
+        <!-- ================= DESKTOP LAYOUT CONTAINER ================= -->
+        <div class="desktop-layout anim-target" id="desktopContainer">
             
-            <div class="stats-grid">
-                <div class="stat-row"><span class="stat-label">Level</span><span class="stat-val" id="s-lvl">50</span></div>
-                <div class="stat-row"><span class="stat-label">Exp</span><span class="stat-val" id="s-exp">12000</span></div>
-                <div class="stat-row"><span class="stat-label">HP</span><span class="stat-val" id="s-hp">3500</span></div>
-                <div class="stat-row"><span class="stat-label">MP</span><span class="stat-val" id="s-mp">1200</span></div>
-                <div class="stat-row"><span class="stat-label">Accuracy</span><span class="stat-val" id="s-acc">95%</span></div>
-                <div class="stat-row"><span class="stat-label">Agility</span><span class="stat-val" id="s-agi">80</span></div>
-                <div class="stat-row"><span class="stat-label">Critical</span><span class="stat-val" id="s-crit">40%</span></div>
-                <div class="stat-row"><span class="stat-label">Ras</span><span class="stat-val" id="s-ras">Mummy</span></div>
-                <div class="stat-row"><span class="stat-label">Umur</span><span class="stat-val" id="s-age">3000+</span></div>
-            </div>
-        </section>
-
-        <!-- === CHARACTER STAGE (DESKTOP) === -->
-        <section class="char-stage desktop-only anim-element">
-            <img src="../pictures/emas.png" alt="Character" class="char-img" id="charImgDesktop">
-        </section>
-
-        <!-- === MOBILE INTERACTIVE AREA (FLIPPER) === -->
-        <!-- Khusus Gold & White, Red beda sendiri -->
-        <div class="char-stage-mobile-wrapper mobile-only anim-element" id="mobileFlipperWrapper">
-            <div class="mobile-flipper" id="mobileFlipper" onclick="flipCard()">
-                <!-- Front: Image -->
-                <div class="flip-face flip-front">
-                    <img src="../pictures/emas.png" alt="Character" class="char-img" id="charImgMobile">
-                    <div style="position: absolute; bottom: 10px; color:white; background:rgba(0,0,0,0.5); padding:5px 10px; border-radius:10px; font-size:0.8rem;">Tap to Flip</div>
+            <!-- Area: INFO PANEL -->
+            <section class="area-info">
+                <div class="info-panel-content" id="desktopInfoContent">
+                    <!-- Populated by JS -->
                 </div>
-                <!-- Back: Info (Will be populated by JS) -->
-                <div class="flip-face flip-back" id="mobileInfoTarget">
-                    <!-- Content copied from info-panel -->
+            </section>
+
+            <!-- Area: IMAGE -->
+            <section class="area-image">
+                <img src="" alt="Character" class="char-img-style" id="desktopCharImg">
+            </section>
+
+            <!-- Area: ELEMENTS (Collection) -->
+            <section class="area-elements" id="desktopElements">
+                <!-- Populated by JS -->
+            </section>
+
+            <!-- Area: NAME (Khusus Red Desktop) -->
+            <section class="area-name-red desktop-only" style="display: none;" id="redNameArea">
+                <h1 class="red-desktop-name">SI MERAH</h1>
+            </section>
+        </div>
+
+        <!-- ================= MOBILE LAYOUT CONTAINER (Flipper) ================= -->
+        <div class="mobile-layout-wrapper anim-target" id="mobileContainer">
+            <div class="flip-container" id="mobFlipper" onclick="this.classList.toggle('flipped')">
+                <div class="flipper">
+                    <!-- Front Face: Elements & Image Row -->
+                    <div class="flip-face front">
+                        <div class="mob-elements-col" id="mobElements">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="mob-image-col">
+                            <img src="" alt="Character" id="mobCharImg">
+                        </div>
+                        <!-- Hint -->
+                        <div style="position:absolute; bottom:10px; left:50%; transform:translateX(-50%); font-size:0.7rem; opacity:0.6;"><i class="fas fa-sync"></i> Tap to flip</div>
+                    </div>
+                    
+                    <!-- Back Face: Stats Info -->
+                    <div class="flip-face back" id="mobInfoContent">
+                         <!-- Populated by JS -->
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- === KHUSUS MOBILE RED (STATS ONLY) === -->
+        <!-- Ini layout spesial buat si Merah di mobile biar ga aneh -->
         <div class="mobile-red-stats mobile-only anim-element" id="mobileRedStats" style="display:none;">
             <!-- Content copied here for Red Mobile -->
         </div>
-        <img src="/pictures/merah2.png" id="mobileRedFixedImg" class="char-red-mobile-fixed" style="display:none;">
-
-        <!-- === COLLECTION PANEL === -->
-        <section class="collection-panel anim-element">
-            <!-- Item 1: Face (Bio) -->
-            <div class="col-item" onclick="openBioPopup()">
-                <div class="col-label"><i class="fas fa-user"></i></div>
-                <!-- Placeholder Face Image -->
-                <img src="../pictures/pensil.png" id="colImgFace" style="border-radius:50%; width:100%; height:100%; object-fit:cover;">
-            </div>
-            
-            <!-- Item 2: Weapon 1 -->
-            <div class="col-item" onclick="openWeaponPopup(0)">
-                <div class="col-label">1</div>
-                <img src="" alt="W1" id="colImgW1" onerror="this.style.display='none'">
-                <i class="fas fa-pencil-alt" id="iconW1" style="font-size:1.5rem; color:#ccc;"></i> <!-- Fallback Icon -->
-            </div>
-
-            <!-- Item 3: Weapon 2 -->
-            <div class="col-item" onclick="openWeaponPopup(1)">
-                <div class="col-label">2</div>
-                <img src="" alt="W2" id="colImgW2" onerror="this.style.display='none'">
-                <i class="fas fa-scroll" id="iconW2" style="font-size:1.5rem; color:#ccc;"></i> <!-- Fallback Icon -->
-            </div>
-        </section>
+        <img src="" id="mobileRedFixedImg" class="char-red-mobile-fixed" style="display:none;">
 
     </main>
+
+    <!-- TEMPLATES: Note penambahan event di onclick -->
+    <template id="tmpl-elements">
+        <div class="col-item" onclick="openBioPopup(event)">
+            <img src="" class="col-img-face" style="border-radius: 14px;">
+        </div>
+        <div class="col-item" onclick="openWeaponPopup(0, event)">
+            <img src="" class="icon-w1" style="border-radius: 14px;">
+        </div>
+        <div class="col-item" onclick="openWeaponPopup(1, event)">
+            <img src="" class="icon-w2" style="border-radius: 14px;">
+        </div>
+    </template>
 
     <!-- === POPUPS === -->
     <div class="popup-overlay" id="popupOverlay" onclick="closePopup(event)">
         <div class="popup-card">
-            <span class="popup-close" onclick="document.getElementById('popupOverlay').classList.remove('active')">&times;</span>
+            <span class="popup-close" onclick="closePopupButton()">&times;</span>
             <div id="popupContent">
                 <!-- Dynamic Content -->
             </div>
         </div>
     </div>
 
-    <script src="../behavior/char-script.js"></script>
+    <!-- Script Link -->
+    <script src="../behavior/chara-script.js"></script>
 </body>
 </html>
