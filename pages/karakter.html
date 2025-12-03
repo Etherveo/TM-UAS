@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karakter - Tiga Benang Kehidupan</title>
+    <title>Info Karakter</title>
     
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,18 +21,16 @@
     <header>
         <div class="nav-left">
             <a href="../index.html" class="nav-btn"><i class="fas fa-arrow-left me-2"></i> Back</a>
-            <a href="#" class="nav-btn">Karawo</a>
-            <a href="#" class="nav-btn">Kitorang</a>
+            <a href="../pages/karawo.html" class="nav-btn">Karawo</a>
+            <a href="../pages/kitorang.html" class="nav-btn">Kitorang</a>
         </div>
 
-        <!-- Desktop Theme Switcher -->
         <div class="theme-switcher-desktop">
             <div class="palette-btn p-gold" onclick="switchTheme('gold')" title="Si Emas"></div>
             <div class="palette-btn p-white" onclick="switchTheme('white')" title="Si Putih"></div>
             <div class="palette-btn p-red" onclick="switchTheme('red')" title="Si Merah"></div>
         </div>
 
-        <!-- Mobile Theme Switcher -->
         <div class="theme-switcher-mobile">
             <div class="current-palette p-gold" id="mobPaletteBtn" onclick="toggleMobMenu()"></div>
             <div class="mobile-dropdown" id="mobDropdown">
@@ -44,89 +42,106 @@
     </header>
 
     <main>
-        <!-- ================= DESKTOP LAYOUT CONTAINER ================= -->
+        <!-- ================= DESKTOP LAYOUT (Grid Areas) ================= -->
         <div class="desktop-layout anim-target" id="desktopContainer">
             
-            <!-- Area: INFO PANEL -->
+            <!-- 1. INFO PANEL (Left) -->
             <section class="area-info">
-                <div class="info-panel-content" id="desktopInfoContent">
-                    <!-- Populated by JS -->
+                <div class="info-panel-content">
+                    <div class="char-header-text">
+                        <span class="char-class-text" id="deskClass">Class Name</span>
+                    </div>
+                    <div class="desc-box-text" id="deskDesc">Description...</div>
+                    <div class="stats-grid" id="deskStats">
+                        <!-- Stats Injected Here -->
+                    </div>
                 </div>
             </section>
 
-            <!-- Area: IMAGE -->
+            <!-- 2. NAME (Center Top / Right Bottom) -->
+            <section class="area-name">
+                <h1 class="char-name-big" id="deskName">SI EMAS</h1>
+            </section>
+
+            <!-- 3. IMAGE (Center Bottom / Right Top) -->
             <section class="area-image">
-                <img src="" alt="Character" class="char-img-style" id="desktopCharImg">
+                <img src="" alt="Character" class="char-img-style" id="deskImg">
             </section>
 
-            <!-- Area: ELEMENTS (Collection) -->
-            <section class="area-elements" id="desktopElements">
-                <!-- Populated by JS -->
+            <!-- 4. EQUIPMENT (Right / Left Top) -->
+            <section class="area-equip" id="deskEquip">
+                <!-- Elements Injected Here -->
             </section>
 
-            <!-- Area: NAME (Khusus Red Desktop) -->
-            <section class="area-name-red desktop-only" style="display: none;" id="redNameArea">
-                <h1 class="red-desktop-name">SI MERAH</h1>
-            </section>
         </div>
 
-        <!-- ================= MOBILE LAYOUT CONTAINER (Flipper) ================= -->
+
+        <!-- ================= MOBILE LAYOUT (Flipper Universal) ================= -->
         <div class="mobile-layout-wrapper anim-target" id="mobileContainer">
+            
+            <!-- Mobile Header (Outside Card) -->
+            <div class="mob-header-section">
+                <h1 class="mob-char-name" id="mobName">SI EMAS</h1>
+                <span class="mob-char-class" id="mobClass">The Visionary</span>
+            </div>
+
+            <!-- Flipper Card -->
             <div class="flip-container" id="mobFlipper" onclick="this.classList.toggle('flipped')">
                 <div class="flipper">
-                    <!-- Front Face: Elements & Image Row -->
+                    
+                    <!-- Front: Image & Equip -->
                     <div class="flip-face front">
-                        <div class="mob-elements-col" id="mobElements">
-                            <!-- Populated by JS -->
+                        <!-- Image Container -->
+                        <div class="mob-front-img">
+                            <img src="" id="mobImg">
                         </div>
-                        <div class="mob-image-col">
-                            <img src="" alt="Character" id="mobCharImg">
+                        <!-- Equipment Container (Vertical Stack) -->
+                        <div class="mob-front-equip" id="mobEquip">
+                            <!-- Icons Injected Here -->
                         </div>
-                        <!-- Hint -->
-                        <div style="position:absolute; bottom:10px; left:50%; transform:translateX(-50%); font-size:0.7rem; opacity:0.6;"><i class="fas fa-sync"></i> Tap to flip</div>
+                        
+                        <div class="flip-hint"><i class="fas fa-sync"></i> Tap to flip</div>
                     </div>
                     
-                    <!-- Back Face: Stats Info -->
-                    <div class="flip-face back" id="mobInfoContent">
-                         <!-- Populated by JS -->
+                    <!-- Back: Stats -->
+                    <div class="flip-face back">
+                        <div class="desc-box-text" id="mobDesc" style="margin-bottom: 1rem;"></div>
+                        <div class="stats-grid" id="mobStats"></div>
                     </div>
+
                 </div>
             </div>
-        </div>
 
-        <!-- === KHUSUS MOBILE RED (STATS ONLY) === -->
-        <!-- Ini layout spesial buat si Merah di mobile biar ga aneh -->
-        <div class="mobile-red-stats mobile-only anim-element" id="mobileRedStats" style="display:none;">
-            <!-- Content copied here for Red Mobile -->
+            <!-- Spacer for future content -->
+            <div class="mobile-spacer">
+                <!-- Area kosong buat lo nambahin sesuatu nanti -->
+            </div>
+
         </div>
-        <img src="" id="mobileRedFixedImg" class="char-red-mobile-fixed" style="display:none;">
 
     </main>
 
-    <!-- TEMPLATES: Note penambahan event di onclick -->
+    <!-- TEMPLATES -->
     <template id="tmpl-elements">
         <div class="col-item" onclick="openBioPopup(event)">
-            <img src="" class="col-img-face" style="border-radius: 14px;">
+            <img src="" class="col-img-face">
         </div>
         <div class="col-item" onclick="openWeaponPopup(0, event)">
-            <img src="" class="icon-w1" style="border-radius: 14px;">
+            <img src="" class="icon-w1">
         </div>
         <div class="col-item" onclick="openWeaponPopup(1, event)">
-            <img src="" class="icon-w2" style="border-radius: 14px;">
+            <img src="" class="icon-w2">
         </div>
     </template>
 
-    <!-- === POPUPS === -->
+    <!-- POPUPS -->
     <div class="popup-overlay" id="popupOverlay" onclick="closePopup(event)">
         <div class="popup-card">
             <span class="popup-close" onclick="closePopupButton()">&times;</span>
-            <div id="popupContent">
-                <!-- Dynamic Content -->
-            </div>
+            <div id="popupContent"></div>
         </div>
     </div>
 
-    <!-- Script Link -->
     <script src="../behavior/chara-script.js"></script>
 </body>
 </html>

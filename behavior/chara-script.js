@@ -40,74 +40,94 @@ const body = document.body;
 const desktopContainer = document.getElementById('desktopContainer');
 const mobileContainer = document.getElementById('mobileContainer');
 
-// Init
 window.onload = () => { loadContent('gold'); };
 
-// === CORE SWITCHING LOGIC ===
 function switchTheme(newTheme) {
     if (activeTheme === newTheme) { toggleMobMenu(false); return; }
 
-    // 1. Trigger EXIT Animation
+    // 1. Exit Anim
     desktopContainer.classList.add('anim-exit');
     mobileContainer.classList.add('anim-exit');
 
-    // 2. Wait for animation, then swap data & layout styles
+    // 2. Change Data
     setTimeout(() => {
-        // Change Theme Variables & Body Data
         body.setAttribute('data-theme', newTheme);
         document.documentElement.style.setProperty('--theme-primary', charData[newTheme].color);
         document.documentElement.style.setProperty('--theme-bg', charData[newTheme].bg);
         
-        // Update Mobile Toggle Button Color
         document.getElementById('mobPaletteBtn').className = `current-palette p-${newTheme}`;
-        toggleMobMenu(false); // Close menu if open
+        toggleMobMenu(false);
 
-        // Handle Special Red Desktop layout visibility
-        const redNameArea = document.getElementById('redNameArea');
-        if(newTheme === 'red') {
-            redNameArea.style.display = 'block';
-        } else {
-            redNameArea.style.display = 'none';
-        }
-
-        // Handle Special Red Mobile Layout visibility
-        const mobFlipper = document.getElementById('mobileFlipperWrapper'); // Container Flipper Biasa
-        const mobRedStats = document.getElementById('mobileRedStats');
-        const mobRedImg = document.getElementById('mobileRedFixedImg');
-        const standardMobContainer = document.querySelector('.flip-container'); // Container Standard
-
-        if (newTheme === 'red') {
-            // Mode Merah Mobile: Hide Flipper standard, Show Red Special
-            standardMobContainer.style.display = 'none';
-            mobRedStats.style.display = 'block';
-            mobRedImg.style.display = 'block';
-        } else {
-            // Mode Normal: Show Flipper standard, Hide Red Special
-            standardMobContainer.style.display = 'block';
-            mobRedStats.style.display = 'none';
-            mobRedImg.style.display = 'none';
-        }
-
-        // Load New Data into DOM
         loadContent(newTheme);
-
-        // Reset Mobile Flipper State
         document.getElementById('mobFlipper').classList.remove('flipped');
 
-        // 3. Trigger ENTER Animation (Remove exit class)
+        // 3. Enter Anim
         setTimeout(() => {
             desktopContainer.classList.remove('anim-exit');
             mobileContainer.classList.remove('anim-exit');
         }, 100); 
 
         activeTheme = newTheme;
-    }, 500); // Match CSS transition time
+    }, 500); 
 }
 
-// === POPUP LOGIC (GLOBAL SCOPE - SEKARANG BISA DIPANGGIL) ===
-function openBioPopup(event) {
-    if(event) event.stopPropagation(); // KUNCI: Mencegah kartu mobile berputar
+function loadContent(theme) {
+    const data = charData[theme];
 
+    // 1. STATS HTML GEN
+    const statsHtml = `
+        <div class="stat-row"><span class="stat-label">Level</span><span class="stat-val">${data.stats.lvl}</span></div>
+        <div class="stat-row"><span class="stat-label">Exp</span><span class="stat-val">${data.stats.exp}</span></div>
+        <div class="stat-row"><span class="stat-label">HP</span><span class="stat-val">${data.stats.hp}</span></div>
+        <div class="stat-row"><span class="stat-label">MP</span><span class="stat-val">${data.stats.mp}</span></div>
+        <div class="stat-row"><span class="stat-label">Acc</span><span class="stat-val">${data.stats.acc}</span></div>
+        <div class="stat-row"><span class="stat-label">Agi</span><span class="stat-val">${data.stats.agi}</span></div>
+        <div class="stat-row"><span class="stat-label">Crit</span><span class="stat-val">${data.stats.crit}</span></div>
+        <div class="stat-row"><span class="stat-label">Ras</span><span class="stat-val">${data.stats.ras}</span></div>
+        <div class="stat-row"><span class="stat-label">Umur</span><span class="stat-val">${data.stats.age}</span></div>
+    `;
+
+    // 2. ELEMENTS HTML GEN
+    const tmpl = document.getElementById('tmpl-elements');
+    const elFrag = tmpl.content.cloneNode(true);
+    elFrag.querySelector('.col-img-face').src = data.img;
+    elFrag.querySelector('.icon-w1').src = data.weapons[0].icon;
+    elFrag.querySelector('.icon-w2').src = data.weapons[1].icon;
+
+    // --- DESKTOP INJECTION ---
+    document.getElementById('deskClass').innerText = data.class;
+    document.getElementById('deskDesc').innerText = data.desc;
+    document.getElementById('deskStats').innerHTML = statsHtml;
+    
+    document.getElementById('deskName').innerText = data.name;
+    document.getElementById('deskImg').src = data.img;
+
+    const deskEquip = document.getElementById('deskEquip');
+    deskEquip.innerHTML = '';
+    deskEquip.appendChild(elFrag.cloneNode(true));
+
+    // --- MOBILE INJECTION ---
+    document.getElementById('mobName').innerText = data.name;
+    document.getElementById('mobClass').innerText = data.class;
+    
+    document.getElementById('mobImg').src = data.img;
+    
+    const mobEquip = document.getElementById('mobEquip');
+    mobEquip.innerHTML = '';
+    mobEquip.appendChild(elFrag.cloneNode(true));
+
+    document.getElementById('mobDesc').innerText = data.desc;
+    document.getElementById('mobStats').innerHTML = statsHtml;
+}
+
+// POPUP & UI FUNCTIONS
+function toggleMobMenu(forceState) {
+    const menu = document.getElementById('mobDropdown');
+    menu.classList.toggle('active', forceState);
+}
+
+function openBioPopup(event) {
+    if(event) event.stopPropagation();
     const data = charData[activeTheme];
     const content = `
         <div style="text-align:center; margin-bottom:1rem;">
@@ -120,8 +140,7 @@ function openBioPopup(event) {
 }
 
 function openWeaponPopup(index, event) {
-    if(event) event.stopPropagation(); // KUNCI: Mencegah kartu mobile berputar
-
+    if(event) event.stopPropagation();
     const data = charData[activeTheme];
     const w = data.weapons[index];
     const content = `
@@ -138,86 +157,13 @@ function openWeaponPopup(index, event) {
 }
 
 function showPopup(html) {
-    const overlay = document.getElementById('popupOverlay');
     document.getElementById('popupContent').innerHTML = html;
-    overlay.classList.add('active');
+    document.getElementById('popupOverlay').classList.add('active');
 }
 
 function closePopup(e) {
-    if (e.target.id === 'popupOverlay') {
-        document.getElementById('popupOverlay').classList.remove('active');
-    }
+    if (e.target.id === 'popupOverlay') document.getElementById('popupOverlay').classList.remove('active');
 }
-
 function closePopupButton() {
     document.getElementById('popupOverlay').classList.remove('active');
-}
-
-// === CONTENT LOADING FUNCTION ===
-function loadContent(theme) {
-    const data = charData[theme];
-
-    // A. Generate INFO PANEL HTML Structure
-    const infoHtml = `
-        <div class="char-header-text">
-            <h1 class="char-name-text" style="color: ${data.color}">${data.name}</h1>
-            <span class="char-class-text">${data.class}</span>
-        </div>
-        <div class="desc-box-text">${data.desc}</div>
-        <div class="stats-grid">
-            <div class="stat-row"><span class="stat-label">Level</span><span class="stat-val">${data.stats.lvl}</span></div>
-            <div class="stat-row"><span class="stat-label">Exp</span><span class="stat-val">${data.stats.exp}</span></div>
-            <div class="stat-row"><span class="stat-label">HP</span><span class="stat-val">${data.stats.hp}</span></div>
-            <div class="stat-row"><span class="stat-label">MP</span><span class="stat-val">${data.stats.mp}</span></div>
-            <div class="stat-row"><span class="stat-label">Acc</span><span class="stat-val">${data.stats.acc}</span></div>
-            <div class="stat-row"><span class="stat-label">Agi</span><span class="stat-val">${data.stats.agi}</span></div>
-            <div class="stat-row"><span class="stat-label">Crit</span><span class="stat-val">${data.stats.crit}</span></div>
-            <div class="stat-row"><span class="stat-label">Ras</span><span class="stat-val">${data.stats.ras}</span></div>
-            <div class="stat-row"><span class="stat-label">Umur</span><span class="stat-val">${data.stats.age}</span></div>
-        </div>
-    `;
-
-    // B. Generate ELEMENTS HTML Structure (from Template)
-    const tmpl = document.getElementById('tmpl-elements');
-    const elementsFragment = tmpl.content.cloneNode(true);
-    // Inject data into template clone
-    elementsFragment.querySelector('.col-img-face').src = data.img;
-    elementsFragment.querySelector('.icon-w1').src = data.weapons[0].icon;
-    elementsFragment.querySelector('.icon-w2').src = data.weapons[1].icon;
-
-    // C. INJECT TO DESKTOP
-    document.getElementById('desktopInfoContent').innerHTML = infoHtml;
-    document.getElementById('desktopCharImg').src = data.img;
-    // Clear and append elements
-    const deskElemContainer = document.getElementById('desktopElements');
-    deskElemContainer.innerHTML = ''; 
-    deskElemContainer.appendChild(elementsFragment.cloneNode(true));
-
-    // D. INJECT TO MOBILE
-    document.getElementById('mobInfoContent').innerHTML = infoHtml;
-    document.getElementById('mobCharImg').src = data.img;
-    
-    // Clear and append elements
-    const mobElemContainer = document.getElementById('mobElements');
-    mobElemContainer.innerHTML = '';
-    mobElemContainer.appendChild(elementsFragment.cloneNode(true));
-
-    // E. INJECT TO MOBILE RED (SPECIAL LAYOUT)
-    const redStatsContainer = document.getElementById('mobileRedStats');
-    const redFixedImg = document.getElementById('mobileRedFixedImg');
-    
-    if (theme === 'red') {
-        redStatsContainer.innerHTML = `<div style="background:rgba(255,255,255,0.9); padding:20px; border-radius:20px; border: 2px solid var(--theme-primary);">${infoHtml}</div>`;
-        redFixedImg.src = data.img;
-    }
-}
-
-// Mobile Menu Toggle
-function toggleMobMenu(forceState) {
-    const menu = document.getElementById('mobDropdown');
-    if (typeof forceState !== 'undefined') {
-        menu.classList.toggle('active', forceState);
-    } else {
-        menu.classList.toggle('active');
-    }
 }
