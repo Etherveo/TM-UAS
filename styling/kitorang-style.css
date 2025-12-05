@@ -7,7 +7,6 @@
 }
 
 body {
-    /* Background lebih ringan, soft gradient statis */
     background: radial-gradient(circle at top right, #fdfbf7, #e8eaed);
     min-height: 100vh;
     color: #333;
@@ -48,7 +47,7 @@ header {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-right: 80px; /* Counter-balance nav button width */
+    margin-right: 80px; 
 }
 
 /* ==================== MAIN CONTENT ==================== */
@@ -61,15 +60,24 @@ main {
     gap: 60px;
 }
 
-/* --- INFINITE SCROLL CONTAINER --- */
+main::before { background: linear-gradient(to left rgba(245,245,245,1), transparent); }
+main::after { background: linear-gradient(to right, rgba(245,245,245,1), transparent); }
+
+/* --- SCROLL CONTAINER --- */
 .scroll-container {
     width: 100%;
-    overflow-x: scroll; /* Hide scrollbar */
+    overflow-x: auto; 
     padding: 20px 0;
     position: relative;
+    /* Sembunyikan Scrollbar */
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    cursor: grab;
 }
+.scroll-container::-webkit-scrollbar { display: none; }
+.scroll-container:active { cursor: grabbing; }
 
-/* Gradient Fade di kiri kanan biar transisinya halus */
+/* Fade kiri-kanan */
 .scroll-container::before,
 .scroll-container::after {
     content: "";
@@ -80,27 +88,22 @@ main {
     z-index: 2;
     pointer-events: none;
 }
-.scroll-container::before { left: 0; background: linear-gradient(to right, rgba(245,245,245,1), transparent); }
-.scroll-container::after { right: 0; background: linear-gradient(to left, rgba(245,245,245,1), transparent); }
+.scroll-container::before { left: 0; }
+.scroll-container::after { right: 0; }
 
 
 .scroll-track {
     display: flex;
-    gap: 40px;
-    width: max-content; /* Lebar ngikutin konten */
-    /* Animasi geser kiri terus menerus */
-    animation: scrollLoop 40s linear infinite; 
+    /* Gap antar GROUP sekarang 0, karena gap antar card diatur di .card-group */
+    gap: 0; 
+    width: max-content;
 }
 
-/* Biar bisa dipause pas di-hover (opsional, biar user bisa baca) */
-.scroll-track:hover {
-    animation-play-state: paused;
-}
-
-@keyframes scrollLoop {
-    0% { transform: translateX(0); }
-    /* Geser sejauh 50% karena isinya diduplikasi (3 card asli + 3 card copy) */
-    100% { transform: translateX(-50%); } 
+/* GROUP STYLING (Penting!) */
+.card-group {
+    display: flex;
+    gap: 40px; /* Jarak antar kartu di dalam grup */
+    padding-right: 40px; /* Jarak ke grup berikutnya (biar sama dengan gap antar kartu) */
 }
 
 /* --- CARD STYLING --- */
@@ -110,16 +113,17 @@ main {
     border-radius: 24px;
     display: flex;
     gap: 25px;
-    width: 550px; /* Fixed width biar scrolling rapi */
-    flex-shrink: 0; /* Jangan mengecil */
+    width: 550px; 
+    flex-shrink: 0; 
     box-shadow: 0 15px 35px rgba(0,0,0,0.08);
     border: 1px solid rgba(0,0,0,0.05);
     transition: 0.3s;
     align-items: center;
+    user-select: none; 
 }
 
 .creator-card:hover {
-    transform: translateY(-10px) scale(1.02);
+    transform: translateY(-5px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.12);
 }
 
@@ -138,6 +142,7 @@ main {
     border-radius: 50%;
     border: 4px solid white;
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    pointer-events: none; 
 }
 
 .creator-name {
@@ -189,7 +194,7 @@ main {
 .soc-link:hover { background: #333; color: white; transform: rotate(360deg); }
 
 
-/* --- EXTRA CONTENT SECTION --- */
+/* --- EXTRA CONTENT --- */
 .extra-content {
     width: 90%;
     max-width: 1000px;
@@ -221,15 +226,14 @@ footer {
     header { padding: 15px 20px; flex-direction: column; gap: 10px; }
     .page-title { margin-right: 0; font-size: 1.5rem; }
     
-    .scroll-track { 
-        gap: 20px; 
-        /* Di mobile bisa dipercepat dikit kalau mau, atau biarin sama */
-        animation-duration: 30s; 
+    .card-group {
+        gap: 20px;
+        padding-right: 20px;
     }
 
     .creator-card {
-        width: 85vw; /* Lebar kartu di mobile hampir full layar */
-        flex-direction: column; /* Tumpuk vertikal di dalam kartu */
+        width: 85vw;
+        flex-direction: column; 
         padding: 25px;
         text-align: center;
     }
@@ -238,5 +242,5 @@ footer {
     .info-box { align-items: center; }
     .socials { justify-content: center; }
     
-    .scroll-container::before, .scroll-container::after { width: 50px; } /* Fade area lebih kecil */
+    .scroll-container::before, .scroll-container::after { width: 40px; }
 }

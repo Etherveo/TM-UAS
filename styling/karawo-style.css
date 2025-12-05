@@ -1,0 +1,143 @@
+/* ==================== BASE ==================== */
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #fdfbf7;
+    background-image: linear-gradient(#e8eaed 1px, transparent 1px),
+    linear-gradient(90deg, #e8eaed 1px, transparent 1px);
+    background-size: 40px 40px; /* Grid pattern halus */
+    color: #333;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ==================== HEADER ==================== */
+header {
+    position: fixed; top: 0; width: 100%; height: 80px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; z-index: 100;
+    background: rgba(253, 251, 247, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.nav-btn {
+    text-decoration: none; color: #333; font-weight: 600;
+    background: #fff; padding: 8px 20px; border-radius: 50px;
+    border: 1px solid #ddd; transition: 0.3s; display: flex; align-items: center; gap: 8px;
+}
+.nav-btn:hover { background: #333; color: white; border-color: #333; }
+
+.page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 700; font-style: italic;
+    color: #2c3e50;
+}
+
+/* ==================== TIMELINE LAYOUT ==================== */
+main {
+    padding-top: 120px;
+    display: flex; justify-content: center;
+}
+
+.timeline-container {
+    width: 90%; max-width: 1000px;
+    display: flex; flex-direction: column;
+    gap: 100px; /* Jarak vertikal antar kartu */
+    position: relative;
+}
+
+/* Garis tengah imajiner (Visual guide opsional, saya hide biar bersih) */
+/* .timeline-container::before { content:''; position: absolute; left: 50%; width: 2px; height: 100%; background: #eee; transform: translateX(-50%); z-index: -1; } */
+
+.karawo-card {
+    width: 45%; /* Desktop: Kartu memakan kurang dari setengah lebar */
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    position: relative;
+    opacity: 0; /* Hidden by default for animation */
+    /* Transisi transform dimatikan di CSS biar JS bisa handle real-time tanpa delay */
+    /* transition: opacity 0.5s ease; */ 
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+/* Posisi Zig-Zag */
+.left-align {
+    align-self: flex-start; /* Nempel Kiri */
+    transform-origin: center right; /* Titik putar untuk efek tilt */
+}
+
+.right-align {
+    align-self: flex-end; /* Nempel Kanan */
+    transform-origin: center left;
+    margin-top: -50px; /* Overlap dikit ke atas biar rapat */
+}
+
+/* Dekorasi Nomer */
+.card-number {
+    position: absolute; top: -30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; font-weight: 900;
+    color: rgba(0,0,0,0.05);
+    z-index: 0;
+}
+.left-align .card-number { right: 20px; }
+.right-align .card-number { left: 20px; }
+
+/* Konten Kartu */
+.card-content { position: relative; z-index: 1; }
+.card-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; margin-bottom: 15px; color: #2c3e50;
+}
+.card-content h3 {
+    font-size: 1rem; text-transform: uppercase; letter-spacing: 2px;
+    color: #888; margin-bottom: 20px; margin-top: -10px;
+}
+.card-content p {
+    font-size: 1.05rem; line-height: 1.8; color: #555; text-align: justify;
+}
+
+/* Tema Spesifik Karakter */
+.gold-theme { border-left: 5px solid #D4AF37; }
+.white-theme { border-right: 5px solid #bdc3c7; }
+.red-theme { border-left: 5px solid #C0392B; }
+
+.card-icon {
+    position: absolute; top: -25px; 
+    width: 60px; height: 60px;
+    background: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.gold-theme .card-icon { color: #D4AF37; border: 2px solid #D4AF37; left: -30px;}
+.white-theme .card-icon { color: #7f8c8d; border: 2px solid #7f8c8d; right: -30px;}
+.red-theme .card-icon { color: #C0392B; border: 2px solid #C0392B; left: -30px;}
+
+
+/* ==================== FOOTER ==================== */
+footer {
+    text-align: center; padding: 40px; color: #aaa; font-size: 0.9rem;
+}
+
+/* ==================== MOBILE RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    header { padding: 15px 20px; }
+    .page-title { font-size: 1.2rem; }
+    
+    .timeline-container { gap: 60px; }
+    
+    .karawo-card {
+        width: 100%; /* Full width di mobile */
+        align-self: center !important; /* Tengah semua */
+        margin-top: 0 !important;
+        transform-origin: center center !important;
+    }
+    
+    .card-icon { left: 50% !important; transform: translateX(-50%); top: -30px; right: auto !important; }
+}
