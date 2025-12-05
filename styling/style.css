@@ -73,7 +73,6 @@
             75%  { background-position: 50% 0%; }
             100% { background-position: 0% 50%; }
         }
-
         /* Dekorasi Kiri/Kanan (Desktop Only) */
         .header-decor {
             position: absolute;
@@ -102,6 +101,21 @@
             position: relative;
             padding: 10px 20px;
             transition: var(--trans-fast);
+        }
+        
+        .nav-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--c-gold);
+            transition: width .3s ease;
+        }
+        
+        .nav-title:hover::after {
+            width: 100%;
         }
 
         .nav-title:hover {
@@ -451,6 +465,21 @@
             /* Header */
             .header-decor { display: none; }
             .nav-title { font-size: 1.2rem; }
+
+            .nav-title::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0%;
+                height: 3px;
+                background: var(--c-gold);
+                transition: width .3s ease;
+            }
+            
+            .nav-title:hover::after {
+                width: 100%;
+            }
             
             /* Hero Section */
             .hero-section {

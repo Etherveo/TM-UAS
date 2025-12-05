@@ -2,7 +2,7 @@
 const charData = {
     gold: {
         theme: 'gold', color: '#D4AF37', bg: '#F9F3E0', img: '../pictures/si_hulawa.png',
-        name: "SI EMAS", class: "The Visionary Planner",
+        name: "SI HULAWA", class: "The Visionary Planner",
         desc: "Perencana ulung yang melihat masa depan dalam selembar kertas kosong. Imajinasinya adalah cetak biru realitas.",
         stats: { lvl: 50, exp: 15000, hp: 4000, mp: 1200, acc: "98%", agi: 60, crit: "30%", ras: "Benang", age: "3000+" },
         weapons: [
@@ -13,8 +13,8 @@ const charData = {
         bio: "Si Hulawa lahir dari benang emas kerajaan kuno. Ia percaya bahwa takdir tidak ditulis oleh dewa, tapi digambar oleh diri sendiri."
     },
     white: {
-        theme: 'white', color: '#333', bg: '#dde1e7', img: '../pictures/putih.png',
-        name: "SI PUTIH", class: "Perfectionist Soul",
+        theme: 'white', color: '#333', bg: '#dde1e7', img: '../pictures/si_moputio.png',
+        name: "SI MOPUTIO", class: "Perfectionist Soul",
         desc: "Presisi adalah segalanya. Tidak ada jahitan yang meleset. Hidup adalah tentang kesempurnaan absolut.",
         stats: { lvl: 55, exp: 18000, hp: 3200, mp: 900, acc: "100%", agi: 85, crit: "70%", ras: "Benang", age: "2800+" },
         weapons: [
@@ -25,8 +25,8 @@ const charData = {
         bio: "Si Putih dulunya adalah kepala penjahit istana yang diasingkan karena terlalu obsesif. Ia mencari kain legendaris yang konon bisa membungkus waktu."
     },
     red: {
-        theme: 'red', color: '#C0392B', bg: '#EADBD9', img: '../pictures/merah.png',
-        name: "SI MERAH", class: "Brave Heart",
+        theme: 'red', color: '#C0392B', bg: '#EADBD9', img: '../pictures/si_lamutu.png',
+        name: "SI LAMUTU", class: "Brave Heart",
         desc: "Keberanian membara dalam serat benang merah. Bertarung bukan untuk menang, tapi untuk melindungi ikatan.",
         stats: { lvl: 60, exp: 22000, hp: 5500, mp: 600, acc: "80%", agi: 90, crit: "50%", ras: "Benang", age: "2500+" },
         weapons: [
