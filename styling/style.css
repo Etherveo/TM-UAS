@@ -62,7 +62,7 @@
             justify-content: center; /* Center title */
             align-items: center;
             box-shadow: 0 20px 20px rgba(0,0,0,0.09);
-            padding: 0 2rem;
+            padding: 0 1rem;
             transition: var(--trans-fast);
         }
 
@@ -99,8 +99,9 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             position: relative;
-            padding: 10px 20px;
+            padding: 10px;
             transition: var(--trans-fast);
+            border-bottom: 2px solid rgb(0, 102, 255);
         }
         
         .nav-title::after {
