@@ -21,7 +21,7 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 20px 40px;
-    background: rgba(255,255,255,0.8);
+    background: linear-gradient(-45deg, #f4f4f9,#e7dc67cc);
     backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
@@ -48,11 +48,11 @@ header {
     cursor: pointer;
     text-decoration: none; /* Untuk tombol back link */
     border: none;
-    background: none;
+    background:#ffffff;
 }
 
 .nav-button:hover {
-    background-color: #f3f4f6; /* gray-100 */
+    background-color: #a0acc4; /* semi-blue */
 }
 
 /* Styling Dropdown Kontainer */

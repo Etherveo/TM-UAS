@@ -1,0 +1,236 @@
+<!-- 
+    Halaman web statis untuk menampilkan cerita karakter.
+    Menggunakan konsep read-only data, di mana data cerita disimpan dalam struktur
+    JSON (atau bisa diganti dengan fetch dari file mentah GitHub) dan di-inject ke HTML.
+    Desain sangat minimalis seperti yang diminta (Judul Chapter, Isi, Penulis).
+-->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerita Karakter - Pembaca Statis</title>
+    <style>
+        /* CSS Dasar */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Kontainer Utama */
+        .story-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
+        /* Judul Chapter */
+        .chapter-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #4c51bf; /* Garis pemisah */
+            padding-bottom: 10px;
+        }
+
+        /* Isi Cerita */
+        .story-content {
+            font-size: 1.1em;
+            margin-bottom: 40px;
+        }
+        /* Style untuk paragraf dalam cerita */
+        .story-content p {
+            margin-bottom: 1.5em;
+        }
+
+        /* Informasi Penulis */
+        .author-info {
+            text-align: right;
+            font-style: italic;
+            color: #6b7280;
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Navigasi Chapter */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .nav-btn {
+            background-color: #4c51bf;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 600;
+        }
+        .nav-btn:hover:not(:disabled) {
+            background-color: #3e449c;
+        }
+        .nav-btn:disabled {
+            background-color: #a0aec0;
+            cursor: not-allowed;
+        }
+        
+        /* Dropdown untuk memilih chapter */
+        .chapter-selector {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="story-container">
+        <!-- Area Navigasi dan Pilihan Chapter -->
+        <div class="navigation">
+            <button id="prev-btn" class="nav-btn">← Chapter Sebelumnya</button>
+            <select id="chapter-select" class="chapter-selector"></select>
+            <button id="next-btn" class="nav-btn">Chapter Berikutnya →</button>
+        </div>
+
+        <!-- Wadah untuk Judul -->
+        <h1 id="chapter-title" class="chapter-title">Memuat...</h1>
+        
+        <!-- Wadah untuk Isi Cerita -->
+        <div id="story-content" class="story-content">
+            <p>Memuat isi cerita...</p>
+        </div>
+        
+        <!-- Penulis Statis -->
+        <div class="author-info">
+            Penulis: Penulis
+        </div>
+    </div>
+
+    <script>
+        // Data Cerita SimulasI (Anggap ini adalah hasil GET dari file JSON di GitHub)
+        const storyData = [
+            {
+                id: 1,
+                title: "Chapter 1: Awal Mula Tiga Benang",
+                content: `
+                    <p>Kabut tebal menyelimuti Distrik Gorontalo. Di tengah hiruk pikuk pasar subuh, sosok bernama Karawo memulai perjalanannya, membawa sepotong kain usang yang konon menyimpan rahasia tenun kuno.</p>
+                    <p>Karawo, dengan mata tajam dan hati penuh ambisi, mencari tahu kebenaran di balik hilangnya para penenun legendaris. Ia tahu, jawaban tersembunyi dalam benang-benang itu, tiga benang kehidupan yang menghubungkan masa lalu, kini, dan masa depan.</p>
+                    <p>Malam itu, ia bertemu dengan Karakter, seorang ahli sejarah yang skeptis namun memiliki pengetahuan mendalam tentang warisan Gorontalo. Pertemuan tak terduga ini menjadi titik balik dari semua yang telah mereka rencanakan.</p>
+                `
+            },
+            {
+                id: 2,
+                title: "Chapter 2: Jejak Kitorang yang Tersembunyi",
+                content: `
+                    <p>Pencarian membawa Karawo dan Karakter ke sebuah desa terpencil yang disebut Kitorang. Desa ini terasing dari dunia luar, dijaga oleh tradisi yang ketat dan diam yang misterius.</p>
+                    <p>Di sana, mereka menemukan ukiran kuno yang menceritakan tentang 'Benang Penjaga'—benang ketiga yang hilang, yang diyakini memiliki kekuatan untuk mengendalikan takdir. Namun, penduduk desa Kitorang menolak untuk berbicara, takut akan kutukan kuno.</p>
+                    <p>Mereka harus mendapatkan kepercayaan dari kepala suku untuk membuka pintu menuju rahasia terbesar Gorontalo, sebelum benang itu jatuh ke tangan yang salah.</p>
+                `
+            },
+            {
+                id: 3,
+                title: "Chapter 3: Duel di Puncak Hutan",
+                content: `
+                    <p>Setelah berhasil melewati berbagai rintangan, Karawo dan Karakter kini berdiri di puncak bukit, berhadapan dengan musuh bebuyutan yang juga memburu Benang Penjaga. Pertarungan sengit tak terhindarkan.</p>
+                    <p>Karakter menggunakan pengetahuannya untuk mencari kelemahan musuh, sementara Karawo mengandalkan kelincahan dan keterampilan tenunnya. Benang-benang mulai bertebaran di udara, membentuk pola rumit yang menentukan nasib mereka.</p>
+                    <p>Pada akhirnya, mereka berhasil mengamankan benang itu, namun dengan harga yang mahal. Petualangan mereka baru saja dimulai.</p>
+                `
+            }
+        ];
+
+        let currentChapterIndex = 0;
+        const chapterTitleElement = document.getElementById('chapter-title');
+        const storyContentElement = document.getElementById('story-content');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const chapterSelect = document.getElementById('chapter-select');
+
+        /**
+         * Fungsi utama untuk menampilkan konten chapter
+         * @param {number} index - Indeks chapter dalam storyData (dimulai dari 0).
+         */
+        function renderChapter(index) {
+            // Pastikan index valid
+            if (index < 0 || index >= storyData.length) {
+                console.error("Chapter index di luar batas.");
+                return;
+            }
+
+            currentChapterIndex = index;
+            const chapter = storyData[currentChapterIndex];
+
+            // 1. Inject Judul
+            chapterTitleElement.textContent = chapter.title;
+
+            // 2. Inject Isi Cerita (menggunakan innerHTML karena konten berupa HTML string)
+            storyContentElement.innerHTML = chapter.content;
+
+            // 3. Update Status Tombol Navigasi
+            prevBtn.disabled = currentChapterIndex === 0;
+            nextBtn.disabled = currentChapterIndex === storyData.length - 1;
+
+            // 4. Update Dropdown
+            chapterSelect.value = currentChapterIndex;
+        }
+
+        /**
+         * Fungsi untuk mengisi dropdown pilihan chapter.
+         */
+        function populateChapterSelect() {
+            storyData.forEach((chapter, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = chapter.title;
+                chapterSelect.appendChild(option);
+            });
+            chapterSelect.addEventListener('change', (event) => {
+                renderChapter(parseInt(event.target.value));
+            });
+        }
+
+        // Event Listeners untuk Navigasi
+        prevBtn.addEventListener('click', () => {
+            if (currentChapterIndex > 0) {
+                renderChapter(currentChapterIndex - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentChapterIndex < storyData.length - 1) {
+                renderChapter(currentChapterIndex + 1);
+            }
+        });
+
+        // Inisialisasi Aplikasi
+        window.onload = function() {
+            populateChapterSelect();
+            // Tampilkan chapter pertama saat halaman dimuat
+            renderChapter(0);
+        };
+
+        /*
+        * CATATAN PENTING UNTUK Voo:
+        * * Untuk benar-benar mengintegrasikan dengan GitHub:
+        * 1. Simpan data cerita (storyData) di sebuah file JSON/Markdown di GitHub (misalnya: /data/stories.json).
+        * 2. Dapatkan URL raw content dari file itu (contoh: https://raw.githubusercontent.com/username/repo/branch/data/stories.json).
+        * 3. Ganti fungsi simulasi di atas dengan fungsi fetch():
+        * * async function fetchStoryData() {
+        * const response = await fetch('URL_RAW_GITHUB_DI_SINI');
+        * const data = await response.json();
+        * // Setelah dapat data, panggil populateChapterSelect(data) dan renderChapter(0, data)
+        * }
+        * * Dengan begini, setiap kali lu update stories.json di GitHub, halaman web lu akan otomatis mengambil data baru.
+        */
+    </script>
+</body>
+</html>

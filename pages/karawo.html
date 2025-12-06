@@ -15,11 +15,48 @@
 </head>
 <body>
 
+    <!-- Header / Navbar Utama -->
     <header>
-        <div class="nav-left">
-            <a href="../index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Home</a>
-        </div>
-        <h1 class="page-title">Jejak Benang Karawo</h1>
+            <!-- Tombol Back (Kiri) -->
+            <a href="../index.html" class="nav-button" aria-label="Kembali ke Halaman Utama" title="Kembali">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+
+            <!-- Judul Halaman (Tengah) -->
+            <div class="page-title">
+                Jejak Benang Karawo
+            </div>
+
+            <!-- Kontainer Dropdown (Kanan) -->
+            <div class="dropdown-wrapper" title="Menu">
+                <button id="dropdown-toggle-btn" onclick="toggleDropdown()" class="nav-button" aria-expanded="false" aria-controls="dropdown-menu">
+                    <!-- Ikon Hamburger (Menu) -->
+                    <span id="menu-icon" class="menu-icon">&#9776;</span>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <ul id="dropdown-menu" class="dropdown-menu" role="menu" aria-labelledby="dropdown-toggle-btn">
+                    <!--
+                        Setiap item menu harus dibungkus dalam div/li dengan kelas 'dropdown-item-wrapper'.
+                        Link di dalamnya memiliki kelas 'dropdown-link' untuk animasi.
+                    -->
+                    <li class="dropdown-item-wrapper">
+                        <a href="../pages/karawo.html" class="dropdown-link" role="menuitem">Karawo</a>
+                    </li>
+                    <li class="dropdown-item-wrapper">
+                        <a href="../pages/karakter.html" class="dropdown-link" role="menuitem">Karakter</a>
+                    </li>
+                    <li class="dropdown-item-wrapper">
+                        <a href="../pages/kitorang.html" class="dropdown-link" role="menuitem">Kitorang</a>
+                    </li>
+                    <li class="dropdown-item-wrapper">
+                        <a href="../pages/index.html" class="dropdown-link" role="menuitem">Dokumentasi (Tambahan)</a>
+                    </li>
+                    <li class="dropdown-item-wrapper">
+                        <a href="../pages/index.html" class="dropdown-link" role="menuitem">Galeri (Tambahan)</a>
+                    </li>
+                </ul>
+            </div>
     </header>
 
     <main>

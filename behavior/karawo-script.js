@@ -72,3 +72,40 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
 });
+
+const dropdownMenu = document.getElementById('dropdown-menu');
+// Mengambil SEMUA link item menu untuk animasi
+const dropdownItems = dropdownMenu.querySelectorAll('.dropdown-link');
+const toggleButton = document.getElementById('dropdown-toggle-btn');
+const staggerDelay = 50; // Jeda (milidetik) antar item menu (0.05 detik)
+/**
+ * Fungsi untuk membuka/menutup dropdown menu dengan animasi staggered.
+ */
+function toggleDropdown() {
+    const isActive = dropdownMenu.classList.toggle('active');
+    toggleButton.setAttribute('aria-expanded', isActive);
+    if (isActive) {
+        // SAAT MEMBUKA: Terapkan delay berurutan (dari atas ke bawah)
+        // Ini memastikan item muncul satu per satu
+        dropdownItems.forEach((item, index) => {
+            const delaySeconds = (index * staggerDelay) / 1000;
+            // Mengatur properti CSS transition-delay secara langsung
+            item.style.transitionDelay = `${delaySeconds}s`;
+        });
+    } else {
+        // SAAT MENUTUP: Terapkan delay terbalik (dari bawah ke atas) 
+        // Ini membuat efek menutup lebih rapi (yang terakhir muncul, duluan hilang)
+        dropdownItems.forEach((item, index) => {
+            const reverseIndex = dropdownItems.length - 1 - index;
+            const delaySeconds = (reverseIndex * staggerDelay) / 1000;
+            item.style.transitionDelay = `${delaySeconds}s`;
+        });
+    }
+}
+// Opsional: Tutup dropdown jika user klik di luar area menu atau tombol
+document.addEventListener('click', (event) => {
+    const isClickInsideDropdown = dropdownMenu.contains(event.target) || toggleButton.contains(event.target);
+    if (!isClickInsideDropdown && dropdownMenu.classList.contains('active')) {
+        toggleDropdown(); // Panggil fungsi untuk menutup
+    }
+});
