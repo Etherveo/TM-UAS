@@ -3,144 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Info Karakter</title>
+    <title>Tentang Kreator - Tiga Benang Kehidupan</title>
     
-    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- CSS Link -->
-    <link rel="stylesheet" href="../styling/red-style.css">
+    <link rel="stylesheet" href="../styling/kitorang-style.css">
     <link rel="icon" type="image/png" href="../pictures/UNG-icon.png">
 </head>
-<body data-theme="gold">
+<body>
 
-    <!-- === HEADER === -->
+    <!-- Header / Navbar Utama -->
     <header>
-        <div class="nav-left">
-            <a href="../index.html" class="nav-btn"><i class="fas fa-arrow-left me-2"></i> Back</a>
-            <a href="../pages/karawo.html" class="nav-btn">Karawo</a>
-            <a href="../pages/kitorang.html" class="nav-btn">Kitorang</a>
-        </div>
+            <!-- Tombol Back (Kiri) -->
+            <a href="../index.html" class="nav-button" aria-label="Kembali ke Halaman Utama">
+                <!-- SVG untuk ikon panah kiri -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            </a>
 
-        <div class="theme-switcher-desktop">
-            <div class="palette-btn p-gold" onclick="switchTheme('gold')" title="Si Emas"></div>
-            <div class="palette-btn p-white" onclick="switchTheme('white')" title="Si Putih"></div>
-            <div class="palette-btn p-red" onclick="switchTheme('red')" title="Si Merah"></div>
-        </div>
-
-        <div class="theme-switcher-mobile">
-            <div class="current-palette p-gold" id="mobPaletteBtn" onclick="toggleMobMenu()"></div>
-            <div class="mobile-dropdown" id="mobDropdown">
-                <div class="palette-btn p-gold" onclick="switchTheme('gold')"></div>
-                <div class="palette-btn p-white" onclick="switchTheme('white')"></div>
-                <div class="palette-btn p-red" onclick="switchTheme('red')"></div>
+            <!-- Judul Halaman (Tengah) -->
+            <div class="page-title">
+                Otak di Balik Layar
             </div>
-        </div>
+
+            <!-- Kontainer Dropdown (Kanan) -->
+            <div class="dropdown-wrapper">
+                <button id="dropdown-toggle-btn" onclick="toggleDropdown()" class="nav-button" aria-expanded="false" aria-controls="dropdown-menu">
+                    <!-- Ikon Hamburger (Menu) -->
+                    <span id="menu-icon" class="menu-icon">&#9776;</span>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <ul id="dropdown-menu" class="dropdown-menu" role="menu" aria-labelledby="dropdown-toggle-btn">
+                    <!--
+                        Setiap item menu harus dibungkus dalam div/li dengan kelas 'dropdown-item-wrapper'.
+                        Link di dalamnya memiliki kelas 'dropdown-link' untuk animasi.
+                    -->
+                    <li class="dropdown-item-wrapper">
+                        <a href="./pages/karawo.html" class="dropdown-link" role="menuitem">Karawo</a>
+                    </li>
+                    <li class="dropdown-item-wrapper">
+                        <a href="./pages/karakter.html" class="dropdown-link" role="menuitem">Karakter</a>
+                    </li>
+                    <li class="dropdown-item-wrapper">
+                        <a href="./pages/kitorang.html" class="dropdown-link" role="menuitem">Kitorang</a>
+                    </li>
+                    <li class="dropdown-item-wrapper">
+                        <a href="./pages/dokumentasi.html" class="dropdown-link" role="menuitem">Dokumentasi (Tambahan)</a>
+                    </li>
+                    <li class="dropdown-item-wrapper">
+                        <a href="./pages/galeri.html" class="dropdown-link" role="menuitem">Galeri (Tambahan)</a>
+                    </li>
+                </ul>
+            </div>
     </header>
 
     <main>
-        <!-- ================= DESKTOP LAYOUT (Grid Areas) ================= -->
-        <div class="desktop-layout anim-target" id="desktopContainer">
-            
-            <!-- 1. INFO PANEL (Left) -->
-            <section class="area-info">
-                <div class="info-panel-content">
-                    <div class="char-header-text">
-                        <span class="char-class-text" id="deskClass">Class Name</span>
+        <!-- SCROLLING WRAPPER -->
+        <div class="scroll-container" id="scrollContainer">
+            <div class="scroll-track" id="scrollTrack">
+                
+                <!-- GROUP 1: ORIGINAL (ID: set-original) -->
+                <div class="card-group" id="set-original">
+                    <!-- 1. ROBBY -->
+                    <div class="creator-card">
+                        <div class="photo-box">
+                            <img src="../pictures/rPP.jpg" alt="Robby" onerror="this.src='https://placehold.co/300x300/D4AF37/FFF?text=Robby'">
+                            <h2 class="creator-name" style="color: #D4AF37;">Robby</h2>
+                        </div>
+                        <div class="info-box">
+                            <p class="bio">
+                                Sang Visioner yang merancang struktur logika website ini. 
+                                Hatinya setenang air, tapi kodenya sekeras emas murni. 
+                                Kalau ada bug, dia yang pertama kali meditasi dulu baru debugging.
+                            </p>
+                            <div class="details">
+                                <p><b>Role:</b> Lead Developer & Planner</p>
+                                <p><b>Spirit:</b> Si Emas</p>
+                            </div>
+                            <div class="socials">
+                                <a href="#" class="soc-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="soc-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="desc-box-text" id="deskDesc">Description...</div>
-                    <div class="stats-grid" id="deskStats">
-                        <!-- Stats Injected Here -->
+
+                    <!-- 2. EKA -->
+                    <div class="creator-card">
+                        <div class="photo-box">
+                            <img src="../pictures/ePP.jpg" alt="Eka" onerror="this.src='https://placehold.co/300x300/999/FFF?text=Eka'">
+                            <h2 class="creator-name" style="color: #7f8c8d;">Eka</h2>
+                        </div>
+                        <div class="info-box">
+                            <p class="bio">
+                                Si Perfeksionis yang nggak bisa tidur kalau ada satu pixel yang miring. 
+                                Menjahit setiap elemen CSS dengan presisi jarum bedah. 
+                                "Rapi pangkal nyaman" adalah jalan ninjanya.
+                            </p>
+                            <div class="details">
+                                <p><b>Role:</b> UI/UX Designer & Stylist</p>
+                                <p><b>Spirit:</b> Si Putih</p>
+                            </div>
+                            <div class="socials">
+                                <a href="#" class="soc-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="soc-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- 3. IHSAN -->
+                    <div class="creator-card">
+                        <div class="photo-box">
+                            <img src="../pictures/iPP.jpg" alt="Ihsan" onerror="this.src='https://placehold.co/300x300/C0392B/FFF?text=Ihsan'">
+                            <h2 class="creator-name" style="color: #C0392B;">Ihsan</h2>
+                        </div>
+                        <div class="info-box">
+                            <p class="bio">
+                                Pemberani yang nekat nyatuin semua kode temen-temennya. 
+                                Suka nambahin fitur "ajaib" di menit-menit terakhir. 
+                                Konektor antar lini yang memastikan benang merah project tidak putus.
+                            </p>
+                            <div class="details">
+                                <p><b>Role:</b> Fullstack Integrator</p>
+                                <p><b>Spirit:</b> Si Merah</p>
+                            </div>
+                            <div class="socials">
+                                <a href="#" class="soc-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="soc-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <!-- END GROUP 1 -->
+
+
+                <!-- GROUP 2: CLONE (ID: set-clone) -->
+                <!-- Isinya SAMA PERSIS dengan Group 1 -->
+                <div class="card-group" id="set-clone">
+                    
+                    <div class="creator-card">
+                        <div class="photo-box">
+                            <img src="../pictures/rPP.jpg" alt="Robby" onerror="this.src='https://placehold.co/300x300/D4AF37/FFF?text=Robby'">
+                            <h2 class="creator-name" style="color: #D4AF37;">Robby</h2>
+                        </div>
+                        <div class="info-box">
+                            <p class="bio">
+                                Sang Visioner yang merancang struktur logika website ini. 
+                                Hatinya setenang air, tapi kodenya sekeras emas murni. 
+                                Kalau ada bug, dia yang pertama kali meditasi dulu baru debugging.
+                            </p>
+                            <div class="details">
+                                <p><b>Role:</b> Lead Developer & Planner</p>
+                                <p><b>Spirit:</b> Si Emas</p>
+                            </div>
+                            <div class="socials">
+                                <a href="#" class="soc-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="soc-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="creator-card">
+                        <div class="photo-box">
+                            <img src="../pictures/ePP.jpg" alt="Eka" onerror="this.src='https://placehold.co/300x300/999/FFF?text=Eka'">
+                            <h2 class="creator-name" style="color: #7f8c8d;">Eka</h2>
+                        </div>
+                        <div class="info-box">
+                            <p class="bio">
+                                Si Perfeksionis yang nggak bisa tidur kalau ada satu pixel yang miring. 
+                                Menjahit setiap elemen CSS dengan presisi jarum bedah. 
+                                "Rapi pangkal nyaman" adalah jalan ninjanya.
+                            </p>
+                            <div class="details">
+                                <p><b>Role:</b> UI/UX Designer & Stylist</p>
+                                <p><b>Spirit:</b> Si Putih</p>
+                            </div>
+                            <div class="socials">
+                                <a href="#" class="soc-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="soc-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="creator-card">
+                        <div class="photo-box">
+                            <img src="../pictures/iPP.jpg" alt="Ihsan" onerror="this.src='https://placehold.co/300x300/C0392B/FFF?text=Ihsan'">
+                            <h2 class="creator-name" style="color: #C0392B;">Ihsan</h2>
+                        </div>
+                        <div class="info-box">
+                            <p class="bio">
+                                Pemberani yang nekat nyatuin semua kode temen-temennya. 
+                                Suka nambahin fitur "ajaib" di menit-menit terakhir. 
+                                Konektor antar lini yang memastikan benang merah project tidak putus.
+                            </p>
+                            <div class="details">
+                                <p><b>Role:</b> Fullstack Integrator</p>
+                                <p><b>Spirit:</b> Si Merah</p>
+                            </div>
+                            <div class="socials">
+                                <a href="#" class="soc-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="soc-link"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-            </section>
+                <!-- END GROUP 2 -->
 
-            <!-- 2. NAME (Center Top / Right Bottom) -->
-            <section class="area-name">
-                <h1 class="char-name-big" id="deskName">SI EMAS</h1>
-            </section>
-
-            <!-- 3. IMAGE (Center Bottom / Right Top) -->
-            <section class="area-image">
-                <img src="" alt="Character" class="char-img-style" id="deskImg">
-            </section>
-
-            <!-- 4. EQUIPMENT (Right / Left Top) -->
-            <section class="area-equip" id="deskEquip">
-                <!-- Elements Injected Here -->
-            </section>
-
+            </div>
         </div>
 
-        <!-- ================= MOBILE LAYOUT (Flipper Universal) ================= -->
-        <div class="mobile-layout-wrapper anim-target" id="mobileContainer">
-            
-            <!-- Mobile Header (Outside Card) -->
-            <div class="mob-header-section">
-                <h1 class="mob-char-name" id="mobName">SI EMAS</h1>
-                <span class="mob-char-class" id="mobClass">The Visionary</span>
+        <!-- Section Tambahan -->
+        <section class="extra-content">
+            <div class="placeholder-box">
+                <h3>Area Konten Tambahan</h3>
+                <p>Tempat buat naruh gallery kegiatan, filosofi project, atau pesan kesan dosen.</p>
             </div>
-
-            <!-- Flipper Card -->
-            <div class="flip-container" id="mobFlipper" onclick="this.classList.toggle('flipped')">
-                <div class="flipper">
-                    
-                    <!-- Front: Image & Equip -->
-                    <div class="flip-face front">
-                        <!-- Image Container -->
-                        <div class="mob-front-img">
-                            <img src="" id="mobImg">
-                        </div>
-                        <!-- Equipment Container (Vertical Stack) -->
-                        <div class="mob-front-equip" id="mobEquip">
-                            <!-- Icons Injected Here -->
-                        </div>
-                        
-                        <div class="flip-hint"><i class="fas fa-sync"></i> Tap to flip</div>
-                    </div>
-                    
-                    <!-- Back: Stats -->
-                    <div class="flip-face back">
-                        <div class="desc-box-text" id="mobDesc" style="margin-bottom: 1rem;"></div>
-                        <div class="stats-grid" id="mobStats"></div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Spacer for future content -->
-            <div class="mobile-spacer">
-                <!-- Area kosong buat lo nambahin sesuatu nanti -->
-            </div>
-
-        </div>
+        </section>
 
     </main>
 
-    <!-- TEMPLATES -->
-    <template id="tmpl-elements">
-        <div class="col-item" onclick="openBioPopup(event)">
-            <img src="" class="col-img-face">
-        </div>
-        <div class="col-item" onclick="openWeaponPopup(0, event)">
-            <img src="" class="icon-w1">
-        </div>
-        <div class="col-item" onclick="openWeaponPopup(1, event)">
-            <img src="" class="icon-w2">
-        </div>
-    </template>
+    <footer>
+        <p>&copy; 2025 Tiga Benang Kehidupan. Ditenun dengan ❤️ dan ☕.</p>
+    </footer>
 
-    <!-- POPUPS -->
-    <div class="popup-overlay" id="popupOverlay" onclick="closePopup(event)">
-        <div class="popup-card">
-            <span class="popup-close" onclick="closePopupButton()">&times;</span>
-            <div id="popupContent"></div>
-        </div>
-    </div>
+    <!-- LOGIC SCROLL BARU -->
+    <script src="../behavior/kitorang-script.js"></script>
+    <script>
+        const dropdownMenu = document.getElementById('dropdown-menu');
+        // Mengambil SEMUA link item menu untuk animasi
+        const dropdownItems = dropdownMenu.querySelectorAll('.dropdown-link');
+        const toggleButton = document.getElementById('dropdown-toggle-btn');
+        const staggerDelay = 50; // Jeda (milidetik) antar item menu (0.05 detik)
 
-    <script src="../behavior/red-script.js"></script>
+        /**
+         * Fungsi untuk membuka/menutup dropdown menu dengan animasi staggered.
+         */
+        function toggleDropdown() {
+            const isActive = dropdownMenu.classList.toggle('active');
+            toggleButton.setAttribute('aria-expanded', isActive);
+
+            if (isActive) {
+                // SAAT MEMBUKA: Terapkan delay berurutan (dari atas ke bawah)
+                // Ini memastikan item muncul satu per satu
+                dropdownItems.forEach((item, index) => {
+                    const delaySeconds = (index * staggerDelay) / 1000;
+                    // Mengatur properti CSS transition-delay secara langsung
+                    item.style.transitionDelay = `${delaySeconds}s`;
+                });
+            } else {
+                // SAAT MENUTUP: Terapkan delay terbalik (dari bawah ke atas) 
+                // Ini membuat efek menutup lebih rapi (yang terakhir muncul, duluan hilang)
+                dropdownItems.forEach((item, index) => {
+                    const reverseIndex = dropdownItems.length - 1 - index;
+                    const delaySeconds = (reverseIndex * staggerDelay) / 1000;
+                    item.style.transitionDelay = `${delaySeconds}s`;
+                });
+            }
+        }
+
+        // Opsional: Tutup dropdown jika user klik di luar area menu atau tombol
+        document.addEventListener('click', (event) => {
+            const isClickInsideDropdown = dropdownMenu.contains(event.target) || toggleButton.contains(event.target);
+            if (!isClickInsideDropdown && dropdownMenu.classList.contains('active')) {
+                toggleDropdown(); // Panggil fungsi untuk menutup
+            }
+        });
+    </script>
+
 </body>
 </html>
