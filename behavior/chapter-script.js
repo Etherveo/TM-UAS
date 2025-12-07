@@ -71,9 +71,11 @@ function renderChapter(index) {
     if (index < 0 || index >= allStories.length) return;
     currentChapterIndex = index;
     const chapter = allStories[currentChapterIndex];
+    const isExist = chapter.content === "deleted" ? "This chapter has been deleted by the author." : chapter.content.replace(/\n/g, '<br>'); // Ganti newline jadi <br>
+
     // Inject Konten
     chapterTitleElement.textContent = chapter.title;
-    storyContentElement.innerHTML = chapter.content.replace(/\n/g, '<br>'); // Ganti newline jadi <br>
+    storyContentElement.innerHTML = isExist;
     authorNameElement.textContent = chapter.author || 'Anonim';
     postDateElement.textContent = new Date(chapter.date || Date.now()).toLocaleDateString('id-ID', {
         year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
@@ -92,8 +94,8 @@ function populateChapterSelect() {
     allStories.forEach((chapter, index) => {
         const option = document.createElement('option');
         option.value = index;
-        const volumeInfo = chapter.volume !== undefined ? ` (Vol-${chapter.volume})` : 'galat';
-        option.textContent = `${chapter.title}${volumeInfo}`;
+        const chapterInfo = chapter.id !== undefined ? ` Ch-${chapter.id}:` : 'galat';
+        option.textContent = `${chapterInfo} ${chapter.title}`;
         chapterSelect.appendChild(option);
     });
     chapterSelect.disabled = false;

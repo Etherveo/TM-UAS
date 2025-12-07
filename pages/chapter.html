@@ -13,39 +13,49 @@
 </head>
 <body>
 
-    <div class="story-container">
-        <!-- Area Navigasi dan Pilihan Chapter -->
-        <div class="navigation">
-            <button id="prev-btn" class="nav-btn">← Sebelumnya</button>
-            <select id="chapter-select" class="chapter-selector" disabled>
-                <option>Memuat...</option>
-            </select>
-            <button id="next-btn" class="nav-btn">Berikutnya →</button>
-        </div>
-
-        <div id="loading-indicator" class="loading-status">
-            Memuat data cerita ...
-        </div>
-
-        <div id="story-display" style="display: none;">
-            <!-- Wadah untuk Judul -->
-            <h1 id="chapter-title" class="chapter-title"></h1>
-            
-            <!-- Wadah untuk Isi Cerita -->
-            <div id="story-content" class="story-content"></div>
-            
-            <!-- Informasi Penulis -->
-            <div class="author-info">
-                Ditulis oleh: <span id="author-name"></span>
-                <br>
-                <small>Diposting pada: <span id="post-date"></span></small>
-            </div>
-        </div>
+    <header>
         
-        <!-- <div class="author-info" style="border: none; margin-top: 30px;">
-            Penulis: Penulis
-        </div> -->
-    </div>
+    </header>
+
+    <main>
+        <div class="story-container">
+            <!-- Area Navigasi dan Pilihan Chapter -->
+            <div class="navigation">
+                <button id="prev-btn" class="nav-btn">← Sebelumnya</button>
+                <select id="chapter-select" class="chapter-selector" disabled>
+                    <option>Memuat...</option>
+                </select>
+                <button id="next-btn" class="nav-btn">Berikutnya →</button>
+            </div>
+    
+            <div id="loading-indicator" class="loading-status">
+                Memuat data cerita ...
+            </div>
+    
+            <div id="story-display" style="display: none;">
+                <!-- Wadah untuk Judul -->
+                <h1 id="chapter-title" class="chapter-title"></h1>
+                
+                <!-- Wadah untuk Isi Cerita -->
+                <div id="story-content" class="story-content"></div>
+                
+                <!-- Informasi Penulis -->
+                <div class="author-info">
+                    Ditulis oleh: <span id="author-name"></span>
+                    <br>
+                    <small>Diposting pada: <span id="post-date"></span></small>
+                </div>
+            </div>
+            
+            <!-- <div class="author-info" style="border: none; margin-top: 30px;">
+                Penulis: Penulis
+            </div> -->
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
 
     <script src="../behavior/chapter-script.js"></script>
 </body>
