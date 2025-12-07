@@ -8,105 +8,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cerita Karakter - Tiga Benang Kehidupan</title>
-    
-    <style>
-        /* CSS Dasar */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f8f8f8;
-            color: #333;
-            line-height: 1.6;
-            transition: all 0.3s ease;
-        }
-
-        /* Kontainer Utama */
-        .story-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            padding: 30px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-        }
-
-        /* Judul Chapter */
-        .chapter-title {
-            font-size: 2.5em;
-            font-weight: 700;
-            color: #1a202c;
-            margin-bottom: 20px;
-            border-bottom: 4px solid #4c51bf;
-            padding-bottom: 10px;
-        }
-
-        /* Isi Cerita */
-        .story-content {
-            font-size: 1.1em;
-            margin-bottom: 40px;
-            white-space: pre-wrap; /* Mempertahankan format baris dari input bot WA */
-        }
-        .story-content p {
-            margin-bottom: 1.5em;
-        }
-
-        /* Informasi Penulis */
-        .author-info {
-            text-align: right;
-            font-style: italic;
-            color: #6b7280;
-            padding-top: 15px;
-            border-top: 1px solid #e5e7eb;
-            font-size: 0.9em;
-        }
-
-        /* Navigasi Chapter */
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 10px 0;
-        }
-        .nav-btn {
-            background-color: #4c51bf;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.1s;
-            font-weight: 600;
-            box-shadow: 0 2px 5px rgba(76, 81, 191, 0.3);
-        }
-        .nav-btn:hover:not(:disabled) {
-            background-color: #3e449c;
-            transform: translateY(-1px);
-        }
-        .nav-btn:disabled {
-            background-color: #a0aec0;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-        
-        /* Dropdown dan Status */
-        .chapter-selector {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            min-width: 200px;
-        }
-
-        .loading-status {
-            text-align: center;
-            color: #4c51bf;
-            font-size: 1.2em;
-            padding: 50px;
-        }
-    </style>
+    <title>Cerita Kami</title>
+    <link rel="stylesheet" href="../styling/chapter-style.css">
 </head>
 <body>
 
@@ -121,7 +24,7 @@
         </div>
 
         <div id="loading-indicator" class="loading-status">
-            Memuat data cerita dari GitHub...
+            Memuat data cerita ...
         </div>
 
         <div id="story-display" style="display: none;">
@@ -139,144 +42,11 @@
             </div>
         </div>
         
-        <div class="author-info" style="border: none; margin-top: 30px;">
+        <!-- <div class="author-info" style="border: none; margin-top: 30px;">
             Penulis: Penulis
-        </div>
+        </div> -->
     </div>
 
-    <script>
-        // ==== KONFIGURASI PENTING ====
-        // GANTI DENGAN REPO DAN FOLDER TUJUAN ANDA
-        const GITHUB_USERNAME = "Etherveo"; 
-        const GITHUB_REPO = "magibase"; 
-        const GITHUB_BRANCH = "main";
-        const GITHUB_FOLDER = "TM-Chapter";
-        // ==============================
-
-        let allStories = [];
-        let currentChapterIndex = 0;
-        
-        // Element HTML
-        const loadingIndicator = document.getElementById('loading-indicator');
-        const storyDisplay = document.getElementById('story-display');
-        const chapterTitleElement = document.getElementById('chapter-title');
-        const storyContentElement = document.getElementById('story-content');
-        const authorNameElement = document.getElementById('author-name');
-        const postDateElement = document.getElementById('post-date');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const chapterSelect = document.getElementById('chapter-select');
-
-        /**
-         * Memuat semua file volume (Vol-0.json, Vol-1.json, dst.) dari raw GitHub.
-         */
-        async function fetchAllStories() {
-            loadingIndicator.style.display = 'block';
-            allStories = [];
-            let volume = 0;
-
-            while (true) {
-                const fileName = `Vol-${volume}.json`;
-                const rawUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/${GITHUB_FOLDER}/${fileName}`;
-                
-                try {
-                    const response = await fetch(rawUrl);
-
-                    if (response.status === 404) {
-                        // File tidak ditemukan, menandakan sudah mencapai volume terakhir
-                        break;
-                    }
-                    if (!response.ok) {
-                        throw new Error(`Gagal memuat ${fileName}: ${response.statusText}`);
-                    }
-
-                    const newChapters = await response.json();
-                    
-                    // Tambahkan volume number ke setiap chapter untuk debugging
-                    const chaptersWithVolume = newChapters.map(chapter => ({
-                        ...chapter,
-                        volume: volume
-                    }));
-
-                    allStories.push(...chaptersWithVolume);
-                    volume++;
-
-                } catch (error) {
-                    console.error(`Error fetching Vol-${volume}.json:`, error.message);
-                    // Jika ada error lain selain 404, hentikan loop
-                    break;
-                }
-            }
-
-            loadingIndicator.style.display = 'none';
-
-            if (allStories.length === 0) {
-                storyDisplay.style.display = 'none';
-                loadingIndicator.textContent = "❌ Belum ada cerita yang diposting. Coba posting dengan bot WA Anda.";
-                return;
-            }
-
-            storyDisplay.style.display = 'block';
-            populateChapterSelect();
-            renderChapter(allStories.length - 1); // Tampilkan chapter terbaru (terakhir)
-        }
-
-        /**
-         * Menampilkan konten chapter ke UI.
-         * @param {number} index - Indeks chapter dalam array allStories.
-         */
-        function renderChapter(index) {
-            if (index < 0 || index >= allStories.length) return;
-
-            currentChapterIndex = index;
-            const chapter = allStories[currentChapterIndex];
-
-            // Inject Konten
-            chapterTitleElement.textContent = chapter.title;
-            storyContentElement.innerHTML = chapter.content.replace(/\n/g, '<br>'); // Ganti newline jadi <br>
-            authorNameElement.textContent = chapter.author || 'Anonim';
-            postDateElement.textContent = new Date(chapter.date || Date.now()).toLocaleDateString('id-ID', {
-                year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
-            });
-
-            // Update Status Tombol Navigasi
-            prevBtn.disabled = currentChapterIndex === 0;
-            nextBtn.disabled = currentChapterIndex === allStories.length - 1;
-
-            // Update Dropdown
-            chapterSelect.value = currentChapterIndex;
-        }
-
-        /**
-         * Mengisi dropdown pilihan chapter.
-         */
-        function populateChapterSelect() {
-            chapterSelect.innerHTML = ''; // Bersihkan opsi lama
-            allStories.forEach((chapter, index) => {
-                const option = document.createElement('option');
-                option.value = index;
-                const volumeInfo = chapter.volume !== undefined ? ` (Vol-${chapter.volume} | ID ${chapter.id})` : '';
-                option.textContent = `${chapter.title}${volumeInfo}`;
-                chapterSelect.appendChild(option);
-            });
-            chapterSelect.disabled = false;
-        }
-
-        // Event Listeners
-        prevBtn.addEventListener('click', () => {
-            if (currentChapterIndex > 0) renderChapter(currentChapterIndex - 1);
-        });
-
-        nextBtn.addEventListener('click', () => {
-            if (currentChapterIndex < allStories.length - 1) renderChapter(currentChapterIndex + 1);
-        });
-
-        chapterSelect.addEventListener('change', (event) => {
-            renderChapter(parseInt(event.target.value));
-        });
-
-        // Inisialisasi Aplikasi
-        window.onload = fetchAllStories;
-    </script>
+    <script src="../behavior/chapter-script.js"></script>
 </body>
 </html>
