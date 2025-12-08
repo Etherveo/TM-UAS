@@ -9,12 +9,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cerita Kami</title>
+    <link rel="icon" type="image/png" href="../pictures/UNG-icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styling/karawo-style.css">
     <link rel="stylesheet" href="../styling/chapter-style.css">
 </head>
 <body>
 
     <header>
-        
+        <!-- Tombol Back (Kiri) -->
+        <a href="../index.html" class="nav-button" aria-label="Kembali ke Halaman Utama" title="Kembali">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+        <!-- Judul Halaman (Tengah) -->
+        <div class="page-title">
+            Torang Punya Cirita
+        </div>
+
+        <!-- Kontainer Dropdown (Kanan) -->
+        <div class="dropdown-wrapper" title="Menu">
+            <button id="dropdown-toggle-btn" onclick="toggleDropdown()" class="nav-button" aria-expanded="false" aria-controls="dropdown-menu">
+                <!-- Ikon Hamburger (Menu) -->
+                <span id="menu-icon" class="menu-icon">&#9776;</span>
+            </button>
+
+            <!-- Dropdown Menu -->
+            <ul id="dropdown-menu" class="dropdown-menu" role="menu" aria-labelledby="dropdown-toggle-btn">
+                <!--
+                    Setiap item menu harus dibungkus dalam div/li dengan kelas 'dropdown-item-wrapper'.
+                    Link di dalamnya memiliki kelas 'dropdown-link' untuk animasi.
+                -->
+                <li class="dropdown-item-wrapper">
+                    <a href="../pages/karawo.html" class="dropdown-link" role="menuitem">Karawo</a>
+                </li>
+                <li class="dropdown-item-wrapper">
+                    <a href="../pages/karakter.html" class="dropdown-link" role="menuitem">Karakter</a>
+                </li>
+                <li class="dropdown-item-wrapper">
+                    <a href="../pages/chapter.html" class="dropdown-link" role="menuitem">Cerita</a>
+                </li>
+                <li class="dropdown-item-wrapper">
+                    <a href="../pages/kitorang.html" class="dropdown-link" role="menuitem">Kitorang</a>
+                </li>
+                <li class="dropdown-item-wrapper">
+                    <a href="../pages/gallery.html" class="dropdown-link" role="menuitem">Galeri</a>
+                </li>
+            </ul>
+        </div>
     </header>
 
     <main>
@@ -57,6 +99,7 @@
 
     </footer>
 
+    <script src="../behavior/karawo-script.js"></script>
     <script src="../behavior/chapter-script.js"></script>
 </body>
 </html>
