@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- CSS Link -->
+     <link rel="stylesheet" href="../styling/kitorang-style.css">
     <link rel="stylesheet" href="../styling/chara-style.css">
     <link rel="icon" type="image/png" href="../pictures/UNG-icon.png">
 </head>
@@ -19,10 +20,45 @@
 
     <!-- === HEADER === -->
     <header>
-        <div class="nav-left">
-            <a href="../index.html" class="nav-btn"><i class="fas fa-arrow-left me-2"></i> Back</a>
+        <div class="nav-left desktop">
+            <a href="../index.html" class="nav-btn" title="Kembali"><i class="fas fa-arrow-left me-2"></i></a>
             <a href="../pages/karawo.html" class="nav-btn">Karawo</a>
+            <a href="../pages/chapter.html" class="nav-btn">Cerita</a>
             <a href="../pages/kitorang.html" class="nav-btn">Kitorang</a>
+            <a href="../pages/gallery.html" class="nav-btn">Galeri</a>
+        </div>
+
+        <div class="nav-left mobile">
+            <a href="../index.html" class="nav-btn" title="Kembali"><i class="fas fa-arrow-left me-2"></i></a>
+            <div class="dropdown-wrapper" title="Menu">
+                <button id="dropdown-toggle-btn" onclick="toggleDropdown()" class="nav-button" aria-expanded="false" aria-controls="dropdown-menu">
+                    <!-- Ikon Hamburger (Menu) -->
+                    <span id="menu-icon" class="menu-icon">&#9776;</span>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <ul id="dropdown-menu" class="dropdown-menu" role="menu" aria-labelledby="dropdown-toggle-btn">
+                    <!--
+                        Setiap item menu harus dibungkus dalam div/li dengan kelas 'dropdown-item-wrapper'.
+                        Link di dalamnya memiliki kelas 'dropdown-link' untuk animasi.
+                    -->
+                    <li class="dropdown-item-wrapper">
+                        <a href="../pages/karawo.html" class="dropdown-link" role="menuitem">Karawo</a>
+                    </li>
+                    <li class="dropdown-item-wrapper">
+                        <a href="../pages/karakter.html" class="dropdown-link" role="menuitem">Karakter</a>
+                    </li>
+                    <li class="dropdown-item-wrapper">
+                        <a href="../pages/chapter.html" class="dropdown-link" role="menuitem">Cerita</a>
+                    </li>
+                    <li class="dropdown-item-wrapper">
+                        <a href="../pages/kitorang.html" class="dropdown-link" role="menuitem">Kitorang</a>
+                    </li>
+                    <li class="dropdown-item-wrapper">
+                        <a href="../pages/gallery.html" class="dropdown-link" role="menuitem">Galeri</a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div class="theme-switcher-desktop">
@@ -30,7 +66,7 @@
             <div class="palette-btn p-white" onclick="switchTheme('white')" title="Si Putih"></div>
             <div class="palette-btn p-red" onclick="switchTheme('red')" title="Si Merah"></div>
         </div>
-
+        
         <div class="theme-switcher-mobile">
             <div class="current-palette p-gold" id="mobPaletteBtn" onclick="toggleMobMenu()"></div>
             <div class="mobile-dropdown" id="mobDropdown">
@@ -178,6 +214,7 @@
         </div>
     </div>
 
+    <script src="../behavior/karawo-script.js"></script>
     <script src="../behavior/chara-script.js"></script>
 </body>
 </html>
